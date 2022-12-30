@@ -2,7 +2,7 @@
 Registration App Python 
 
 # Group Members:
-Tanir Sahoo:        Front-End(UI) Developer
-Subhankar Ray:      Back-End(Data Integration & File Handling) Developer
-Dyutiprovo Ray:     Back-End(Error Analysis) Developer
-Soumaydeep Samanta: Front-End(Error-Analysis) Developer
+Tanir Sahoo:        Front-End(UI) Developer ,
+Subhankar Ray:      Back-End(Data Integration & File Handling) Developer ,
+Dyutiprovo Ray:     Back-End(Error Analysis) Developer ,
+Soumaydeep Samanta: Front-End(Error-Analysis) Developer .
