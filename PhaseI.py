@@ -1,8 +1,12 @@
 import csv
+import os
 
 from tkinter import *
 from tkinter import filedialog as fd
 from tkinter import messagebox as tmsg
+
+preDefinedFilePath="D:\\Git_&_Github\\Git\\Group_Project\\Data.csv"
+preDefinedDIRPath="D:\\Git_&_Github\\Git\\Group_Project"
 
 windObj = Tk()
 colorPalette=["#ffffff","#429ef5","#000000"]
@@ -143,6 +147,7 @@ class Container:
   for i in self.eObj:
     self.data.append(i.get())
   self.fh.writeData(self.data)
+  self.data.clear()
   
  def conEvent(self):
   self.menu()
@@ -154,24 +159,23 @@ class Container:
 class fileHandle:
  
   def __init__(self):
-   self.converter=[]
    return
   
-  def writeData(self,data):
-   print(data)
-   self.converter.append(data)
+  def createFile(self):
    f=open("Data.csv","w",newline="")
    csvWriter=csv.writer(f)
    csvWriter.writerow(header)
-   csvWriter.writerows(self.converter)
+  
+  def writeData(self,data):
+   print("Data:",data)
+   f=open("Data.csv","a",newline="")
+   csvWriter=csv.writer(f)
+   #csvWriter.writerow(header)
+   csvWriter.writerow(data)
    f.close()
-   self.cleanUp()
-
-  def cleanUp(self):
-   self.converter=[]
   
   def viewData(self):
-   filePath=fd.askopenfilename(initialdir="D:\\Databse",title="MasterViewer",filetypes=[("Excel Speadsheet","*.csv"),("Text Files","*.txt")])
+   filePath=fd.askopenfilename(initialdir=preDefinedDIRPath,title="MasterViewer",filetypes=[("Excel Speadsheet","*.csv"),("Text Files","*.txt")])
    file=open(filePath,"r")
    print("GoTo:",filePath)
    file.close()
@@ -180,6 +184,9 @@ class fileHandle:
   
 def main():
  RegWindow().windows()
+ 
+ if(not os.path.exists(preDefinedFilePath)):
+  fileHandle().createFile()
  Container().conEvent()
  windObj.mainloop()
 
