@@ -1,9 +1,13 @@
 import csv
 import os
+import numpy as np
 
 from tkinter import *
 from tkinter import filedialog as fd
 from tkinter import messagebox as tmsg
+from tkinter import simpledialog
+
+mKey="123"
 
 preDefinedFilePath="D:\\Git_&_Github\\Git\\Group_Project\\Data.csv"
 preDefinedDIRPath="D:\\Git_&_Github\\Git\\Group_Project"
@@ -27,7 +31,6 @@ class RegWindow:
   windObj.title("TDSSS and Company")
   windObj.configure(bg=colorPalette[0])
 
-
 class Container:
  
  def __init__(self):
@@ -39,20 +42,17 @@ class Container:
   self.fh=fileHandle()
   return
  
- def register_by_tanir(self):
-   print("Hello this is registration portal")
+ def register(self):
+   tmsg.showinfo("register-portal","Register-Portal")
 
- def view_by_tanir(self):
-   print("Hello this is view portal")
- 
- def register_button(self):
-    print("Your data has been submitted.")
+ def view(self):
+   tmsg.showinfo("view-portal","View-Portal") 
 
  def menu(self):
   yourmenu = Menu(windObj)
   m_first = Menu(yourmenu , tearoff=0)
-  m_first.add_command(label = self.menuNm[0] , command =lambda:self.register_by_tanir())
-  m_first.add_command(label = self.menuNm[1], command = lambda:self.view_by_tanir())
+  m_first.add_command(label = self.menuNm[0] , command =lambda:self.register())
+  m_first.add_command(label = self.menuNm[1], command = lambda:self.view())
   yourmenu.add_cascade(label=self.menuNm[2], menu=m_first)
 
   m_second = Menu(yourmenu , tearoff=0)
@@ -168,23 +168,41 @@ class fileHandle:
   
   def writeData(self,data):
    print("Data:",data)
-   f=open("Data.csv","a",newline="")
-   csvWriter=csv.writer(f)
-   #csvWriter.writerow(header)
-   csvWriter.writerow(data)
-   f.close()
+   if(not self.isRepeatEntry(data)):
+    f=open("Data.csv","a",newline="")
+    csvWriter=csv.writer(f)
+    csvWriter.writerow(data)
+    f.close()
   
   def viewData(self):
-   filePath=fd.askopenfilename(initialdir=preDefinedDIRPath,title="MasterViewer",filetypes=[("Excel Speadsheet","*.csv"),("Text Files","*.txt")])
-   file=open(filePath,"r")
-   print("GoTo:",filePath)
-   file.close()
-   tmsg.showinfo(str(filePath),str(filePath))
+   dialogueBox=Tk()
+   dialogueBox.withdraw()
+   key=simpledialog.askstring(title="Master Key",prompt="Key?")
+   if(key==mKey):
+    filePath=fd.askopenfilename(initialdir=preDefinedDIRPath,title="MasterViewer",filetypes=[("Excel Speadsheet","*.csv"),("Text Files","*.txt")])
+    tmsg.showinfo(str(filePath),str(filePath))
+    os.system(r"Data.csv")
   
+  def isRepeatEntry(self,data):
+   rows=[]
+   rows=np.array(self.readData())
+   for i in range(len(rows)):
+    if((rows[i][0]==data[0])or(rows[i][5]==data[5])):
+     return True
+   return False
+
+  def readData(self):
+   f=open("Data.csv","r")
+   csvReader=csv.reader(f)
+   tempVar=next(csvReader)
+   rows=[]
+   for i in csvReader:
+     rows.append(i)
+   f.close()
+   return rows
   
 def main():
  RegWindow().windows()
- 
  if(not os.path.exists(preDefinedFilePath)):
   fileHandle().createFile()
  Container().conEvent()
