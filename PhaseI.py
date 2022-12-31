@@ -9,12 +9,12 @@ from tkinter import simpledialog
 
 mKey="123"
 
-preDefinedFilePath="D:\\Git_&_Github\\Git\\Group_Project\\Data.csv"
-preDefinedDIRPath="D:\\Git_&_Github\\Git\\Group_Project"
+preDefinedFilePath="D:\\DataFolder\\Data.csv"
+preDefinedDirPath="D:\\DataFolder"
 
 windObj = Tk()
 colorPalette=["#ffffff","#429ef5","#000000"]
-fontStyles=[]
+fontStyles=["Bitter 10"]
 header=["Registration Number:","First Name:","Middle Name:","Last Name:","Contact Number:","Email:","Gender:"]
 err=["0x01:Invalid-Entry","0x02:Invalid-Character","0x03:Compulsory-Entry","0x04:Invalid-Digit"]
 
@@ -90,36 +90,36 @@ class Container:
    #Layout-Component:Gen
    lObj.append(Label(self.fc[0] , text="WELCOME TO TDSSS & COMPANY" , fg=colorPalette[0] , bg=colorPalette[1] , font="Courier 18 bold"))
    lObj.append(Label(self.fc[0] , text="Please complete your registration" , fg=colorPalette[0] , bg=colorPalette[1] , font="System 15 bold" , pady=0))
-   lObj.append(Label(self.fc[1] , text=header[0], font="Bitter 10" , bg=colorPalette[0]))
-   lObj.append(Label(self.fc[1] , text=header[1], font="Bitter 10" , bg=colorPalette[0]))
-   lObj.append(Label(self.fc[1] , text=header[2], font="Bitter 10" , bg=colorPalette[0]))
-   lObj.append(Label(self.fc[1] , text=header[3], font="Bitter 10" , bg=colorPalette[0])) 
-   lObj.append(Label(self.fc[1] , text=header[4], font="Bitter 10" , bg=colorPalette[0])) 
-   lObj.append(Label(self.fc[1], text=header[5] , font="Bitter 10" , bg=colorPalette[0]))
-   lObj.append(Label(self.fc[1] , text=header[6], font="Bitter 10" , bg=colorPalette[0]))
+   lObj.append(Label(self.fc[1] , text=header[0], font=fontStyles[0] , bg=colorPalette[0]))
+   lObj.append(Label(self.fc[1] , text=header[1], font=fontStyles[0] , bg=colorPalette[0]))
+   lObj.append(Label(self.fc[1] , text=header[2], font=fontStyles[0] , bg=colorPalette[0]))
+   lObj.append(Label(self.fc[1] , text=header[3], font=fontStyles[0], bg=colorPalette[0])) 
+   lObj.append(Label(self.fc[1] , text=header[4], font=fontStyles[0] , bg=colorPalette[0])) 
+   lObj.append(Label(self.fc[1], text=header[5] , font=fontStyles[0] , bg=colorPalette[0]))
+   lObj.append(Label(self.fc[1] , text=header[6], font=fontStyles[0] , bg=colorPalette[0]))
    
    dataEntry.append(StringVar())
-   self.eObj.append(Entry(self.fc[1], textvariable=dataEntry[0],font="Bitter 10" , highlightbackground=colorPalette[2], highlightthickness=1))
+   self.eObj.append(Entry(self.fc[1], textvariable=dataEntry[0],font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
    dataEntry.append(StringVar())
-   self.eObj.append(Entry(self.fc[1] , textvariable=dataEntry[1] , font="Bitter 10" , highlightbackground=colorPalette[2], highlightthickness=1))
+   self.eObj.append(Entry(self.fc[1] , textvariable=dataEntry[1] , font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
    dataEntry.append(StringVar())
-   self.eObj.append(Entry(self.fc[1] , textvariable=dataEntry[2] , font="Bitter 10" , highlightbackground=colorPalette[2], highlightthickness=1))
+   self.eObj.append(Entry(self.fc[1] , textvariable=dataEntry[2] , font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
    dataEntry.append(StringVar())
-   self.eObj.append(Entry(self.fc[1] , textvariable=dataEntry[3] , font="Bitter 10" , highlightbackground=colorPalette[2], highlightthickness=1))
+   self.eObj.append(Entry(self.fc[1] , textvariable=dataEntry[3] , font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
    dataEntry.append(StringVar())
-   self.eObj.append(Entry(self.fc[1], textvariable = dataEntry[4] , font="Bitter 10" , highlightbackground=colorPalette[2], highlightthickness=1))
+   self.eObj.append(Entry(self.fc[1], textvariable = dataEntry[4] , font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
    
    dataEntry.append(StringVar())
-   self.eObj.append(Entry(self.fc[1], textvariable=dataEntry[5], font="Bitter 10" , highlightbackground=colorPalette[2], highlightthickness=1))
+   self.eObj.append(Entry(self.fc[1], textvariable=dataEntry[5], font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
    
    dataEntry.append(StringVar())
    dataEntry[6].set("Male")
-   self.rObj.append(Radiobutton(self.fc[1], text="Female" , font="Bitter 10" , bg=colorPalette[0] , variable=dataEntry[6] , value="Female"))
-   self.rObj.append(Radiobutton(self.fc[1] , text="Male" , font="Bitter 10" , bg=colorPalette[0], variable=dataEntry[6] , value="Male"))
-   self.rObj.append(Radiobutton(self.fc[1] , text="Others" , font="Bitter 10" , bg=colorPalette[0] , variable=dataEntry[6] , value="Others"))
+   self.rObj.append(Radiobutton(self.fc[1], text="Female" , font=fontStyles[0] , bg=colorPalette[0] , variable=dataEntry[6] , value="Female"))
+   self.rObj.append(Radiobutton(self.fc[1] , text="Male" , font=fontStyles[0] , bg=colorPalette[0], variable=dataEntry[6] , value="Male"))
+   self.rObj.append(Radiobutton(self.fc[1] , text="Others" , font=fontStyles[0] , bg=colorPalette[0] , variable=dataEntry[6] , value="Others"))
    
    dataEntry.append(StringVar())
-   terms_and_conditions = Checkbutton(self.fc[2], text="By clicking on this button you agree to our terms and conditions." , variable=dataEntry[7] , bg=colorPalette[0] , font="Bitter 10")
+   terms_and_conditions = Checkbutton(self.fc[2], text="By clicking on this button you agree to our terms and conditions." , variable=dataEntry[7] , bg=colorPalette[0] , font=fontStyles[0])
    
    #Layout-Component:Position
    lObj[0].pack(side="top" , pady=(40 , 20))
@@ -174,14 +174,14 @@ class fileHandle:
    return
   
   def createFile(self):
-   f=open("Data.csv","w",newline="")
+   f=open(preDefinedFilePath,"w",newline="")
    csvWriter=csv.writer(f)
    csvWriter.writerow(header)
   
   def writeData(self,data):
    print("Data:",data)
    if(not self.isRepeatEntry(data)):
-    f=open("Data.csv","a",newline="")
+    f=open(preDefinedFilePath,"a",newline="")
     csvWriter=csv.writer(f)
     csvWriter.writerow(data)
     f.close()
@@ -191,9 +191,8 @@ class fileHandle:
    dialogueBox.withdraw()
    key=simpledialog.askstring(title="Master Key",prompt="Key?")
    if(key==mKey):
-    filePath=fd.askopenfilename(initialdir=preDefinedDIRPath,title="MasterViewer",filetypes=[("Excel Speadsheet","*.csv"),("Text Files","*.txt")])
-    tmsg.showinfo(str(filePath),str(filePath))
-    os.system(r"Data.csv")
+    os.system(r"D:\\DataFolder\\Data.csv")
+   dialogueBox.destroy()
   
   def isRepeatEntry(self,data):
    rows=[]
@@ -204,7 +203,7 @@ class fileHandle:
    return False
 
   def readData(self):
-   f=open("Data.csv","r")
+   f=open(preDefinedFilePath,"r")
    csvReader=csv.reader(f)
    tempVar=next(csvReader)
    rows=[]
@@ -267,10 +266,24 @@ class Errors:
    else:
      return True
   
+  
+class pathManager:
+  
+  def __init__(self):
+   return
+   
+  def dirHandler(self):
+   if(not os.path.exists(preDefinedDirPath)):
+    os.mkdir(preDefinedDirPath)
+   self.isFileExist()
+    
+  def isFileExist(self):
+   if(not os.path.exists(preDefinedFilePath)):
+    fileHandle().createFile()
+  
 def main():
  RegWindow().windows()
- if(not os.path.exists(preDefinedFilePath)):
-  fileHandle().createFile()
+ pathManager().dirHandler()
  Container().conEvent()
  windObj.mainloop()
 
