@@ -16,6 +16,8 @@ windObj = Tk()
 colorPalette=["#ffffff","#429ef5","#000000"]
 fontStyles=[]
 header=["Registration Number:","First Name:","Middle Name:","Last Name:","Contact Number:","Email:","Gender:"]
+err=["0x01:Invalid-Entry","0x02:Invalid-Character","0x03:Compulsory-Entry","0x04:Invalid-Digit"]
+
 
 class RegWindow:
 
@@ -40,6 +42,7 @@ class Container:
   self.eObj=[]
   self.rObj=[]
   self.fh=fileHandle()
+  self.er=Errors()
   return
  
  def register(self):
@@ -146,7 +149,16 @@ class Container:
  def collectInfo(self):
   for i in self.eObj:
     self.data.append(i.get())
-  self.fh.writeData(self.data)
+  if(self.er.reg(self.data[0])!=5):
+    tmsg.showinfo("ERROR",err[self.er.reg(self.data[0])])
+  elif(self.er.names(self.data[1],self.data[2],self.data[3])!=5):
+    tmsg.showinfo("ERROR",err[self.er.names(self.data[1],self.data[2],self.data[3])])
+  elif(self.er.phone(self.data[4])!=5):
+    tmsg.showinfo("ERROR",err[self.er.phone(self.data[4])])
+  elif(self.er.mail(self.data[5])!=5):
+    tmsg.showinfo("ERROR",err[self.er.mail(self.data[5])])
+  else:
+    self.fh.writeData(self.data)
   self.data.clear()
   
  def conEvent(self):
@@ -200,6 +212,60 @@ class fileHandle:
      rows.append(i)
    f.close()
    return rows
+  
+class Errors:
+  
+  def reg(self,num):
+   k=num.isalnum()
+   if k==True:
+     if len(num)==5:
+         return 5
+     else:
+         return 0
+   else:
+     print("Alpha",k)
+     return 1
+      
+  def names(self,f,m,l):
+   if len(f)==0 or len(l)==0:
+     return 2
+   else:
+     f1=f.isalpha()
+     l1=l.isalpha()
+     m1=True
+     if len(m)!=0:
+       m1=m.isalpha()
+       if f1 is True and m1 is True and l1 is True:
+         return 5
+       else:
+         return 1
+     else:
+       if f1 is True and l1 is True:
+         return 5
+       else:
+         return 1
+         
+  def phone(self,n):
+   if len(n)<10 or len(n)>10:
+     return 0
+   else:
+     n1=n.isdigit()
+     if n1==True:
+       return 5
+     else:
+       return 3
+            
+  def mail(self,e):
+   if len(e)==0:
+     return 2
+   else:
+     return 5
+      
+  def checker(self,num,f,l,n,e):
+   if len(num) == 0 or len(f) == 0 or len(l) == 0 or len(e) == 0 or len(n) == 0:
+     return False
+   else:
+     return True
   
 def main():
  RegWindow().windows()
