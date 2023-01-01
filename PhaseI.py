@@ -183,7 +183,17 @@ class fileHandle:
     csvWriter=csv.writer(f)
     csvWriter.writerow(data)
     f.close()
-  
+    self.sortData()
+
+  def sortData(self):
+   rows=[]
+   rows=np.array(self.readData())
+   self.createFile()
+   f=open(preDefinedFilePath,"a",newline="")
+   csvWriter=csv.writer(f)
+   csvWriter.writerows(rows[rows[:,0].argsort()])
+   f.close()
+   
   def viewData(self):
    dialogueBox=Tk()
    dialogueBox.withdraw()
