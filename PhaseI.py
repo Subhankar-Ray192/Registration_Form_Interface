@@ -224,9 +224,16 @@ class Errors:
   
   def reg(self,num):
    k=num.isalnum()
+   c=0
    if k==True:
      if len(num)==5:
-         return 5
+       for i in num:
+        if (i.isdigit()):
+          c=c+1
+       if c==3:
+        return 5
+       else:
+        return 1
      else:
          return 0
    else:
@@ -242,14 +249,21 @@ class Errors:
      if len(m)!=0:
        m1=m.isalpha()
        if f1 is True and m1 is True and l1 is True:
-         return 5
-       else:
-         return 1
+         f2=f.isupper()
+         l2=l.isupper()
+         m2=m.isupper()
+         if f2 is True and m2 is True and l2 is True:
+           return 5
+         else:
+           return 1
      else:
        if f1 is True and l1 is True:
-         return 5
-       else:
-         return 1
+         f2=f.isupper()
+         l2=l.isupper()
+         if f2 is True and l2 is True:
+           return 5
+         else:
+           return 1
          
   def phone(self,n):
    if len(n)<10 or len(n)>10:
