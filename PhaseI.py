@@ -17,7 +17,7 @@ colorPalette=["#ffffff","#429ef5","#000000"]
 fontStyles=["Bitter 10"]
 header=["Registration Number:","First Name:","Middle Name:","Last Name:","Contact Number:","Email:","Gender:"]
 err=["0x01:Invalid-Entry","0x02:Invalid-Character","0x03:Compulsory-Entry","0x04:Invalid-Digit"]
-
+gCategory=["F","M","O"]
 
 class RegWindow:
 
@@ -40,9 +40,9 @@ class Container:
   self.fc=[]
   self.data=[]
   self.eObj=[]
-  self.rObj=[]
   self.fh=fileHandle()
   self.er=Errors()
+  self.currGender=""
   return
  
  def register(self):
@@ -85,7 +85,9 @@ class Container:
  def layout(self):
    lObj=[]
    
-   dataEntry=[]
+   gSelect=0
+
+   rObj=[]
    
    #Layout-Component:Gen
    lObj.append(Label(self.fc[0] , text="WELCOME TO TDSSS & COMPANY" , fg=colorPalette[0] , bg=colorPalette[1] , font="Courier 18 bold"))
@@ -98,28 +100,20 @@ class Container:
    lObj.append(Label(self.fc[1], text=header[5] , font=fontStyles[0] , bg=colorPalette[0]))
    lObj.append(Label(self.fc[1] , text=header[6], font=fontStyles[0] , bg=colorPalette[0]))
    
-   dataEntry.append(StringVar())
-   self.eObj.append(Entry(self.fc[1], textvariable=dataEntry[0],font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
-   dataEntry.append(StringVar())
-   self.eObj.append(Entry(self.fc[1] , textvariable=dataEntry[1] , font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
-   dataEntry.append(StringVar())
-   self.eObj.append(Entry(self.fc[1] , textvariable=dataEntry[2] , font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
-   dataEntry.append(StringVar())
-   self.eObj.append(Entry(self.fc[1] , textvariable=dataEntry[3] , font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
-   dataEntry.append(StringVar())
-   self.eObj.append(Entry(self.fc[1], textvariable = dataEntry[4] , font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
+   self.eObj.append(Entry(self.fc[1],font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
+   self.eObj.append(Entry(self.fc[1] , font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
+   self.eObj.append(Entry(self.fc[1] , font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
+   self.eObj.append(Entry(self.fc[1], font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
+   self.eObj.append(Entry(self.fc[1], font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
+   self.eObj.append(Entry(self.fc[1], font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
    
-   dataEntry.append(StringVar())
-   self.eObj.append(Entry(self.fc[1], textvariable=dataEntry[5], font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
+   gSelect=IntVar()
+   gSelect.set("None")
+   rObj.append(Radiobutton(self.fc[1], text="Female" , font=fontStyles[0] , bg=colorPalette[0] , variable=gSelect , value=0, command=lambda:self.genderSelect(gSelect.get())))
+   rObj.append(Radiobutton(self.fc[1] , text="Male" , font=fontStyles[0] , bg=colorPalette[0], variable=gSelect , value=1, command=lambda:self.genderSelect(gSelect.get())))
+   rObj.append(Radiobutton(self.fc[1] , text="Others" , font=fontStyles[0] , bg=colorPalette[0] , variable=gSelect , value=2, command=lambda:self.genderSelect(gSelect.get())))
    
-   dataEntry.append(StringVar())
-   dataEntry[6].set("Male")
-   self.rObj.append(Radiobutton(self.fc[1], text="Female" , font=fontStyles[0] , bg=colorPalette[0] , variable=dataEntry[6] , value="Female"))
-   self.rObj.append(Radiobutton(self.fc[1] , text="Male" , font=fontStyles[0] , bg=colorPalette[0], variable=dataEntry[6] , value="Male"))
-   self.rObj.append(Radiobutton(self.fc[1] , text="Others" , font=fontStyles[0] , bg=colorPalette[0] , variable=dataEntry[6] , value="Others"))
-   
-   dataEntry.append(StringVar())
-   terms_and_conditions = Checkbutton(self.fc[2], text="By clicking on this button you agree to our terms and conditions." , variable=dataEntry[7] , bg=colorPalette[0] , font=fontStyles[0])
+   terms_and_conditions = Checkbutton(self.fc[2], text="By clicking on this button you agree to our terms and conditions."  , bg=colorPalette[0] , font=fontStyles[0])
    
    #Layout-Component:Position
    lObj[0].pack(side="top" , pady=(40 , 20))
@@ -137,18 +131,22 @@ class Container:
    lObj[7].grid(row=5 , column=1 , sticky=W , pady=(20 , 0))
    self.eObj[5].grid(row=5 , column=2 , sticky=W , pady=(20 , 0) , padx=(5 , 0))
    lObj[8].grid(row=6 , column=1 , sticky=W , pady=(20 , 0))
-   self.rObj[0].grid(row=7 , column=1 , sticky=W , padx=(0 , 0) , pady=(0 , 0))
-   self.rObj[1].grid(row=7 , column=2 , sticky=W , padx=(0 , 0) , pady=(0 , 0))
-   self.rObj[2].grid(row=7 , column=3 , sticky=W , padx=(0 , 0) , pady=(0 , 0))
+   rObj[0].grid(row=7 , column=1 , sticky=W , padx=(0 , 0) , pady=(0 , 0))
+   rObj[1].grid(row=7 , column=2 , sticky=W , padx=(0 , 0) , pady=(0 , 0))
+   rObj[2].grid(row=7 , column=3 , sticky=W , padx=(0 , 0) , pady=(0 , 0))
    terms_and_conditions.grid(row=8 , column=1 , pady=(10 , 0))
 
  def button(self):
   btn=Button(self.fc[3], text="Register" , command=lambda:self.collectInfo(), bg=colorPalette[1] , fg=colorPalette[0] , padx=208 , pady=10 , font="Bitter 14")
   btn.grid(row=9 , column=1)
  
+ def genderSelect(self,value):
+  self.currGender=gCategory[value]
+  
  def collectInfo(self):
   for i in self.eObj:
     self.data.append(i.get())
+  self.data.append(self.currGender)
   if(self.er.reg(self.data[0])!=5):
     tmsg.showinfo("ERROR",err[self.er.reg(self.data[0])])
   elif(self.er.names(self.data[1],self.data[2],self.data[3])!=5):
@@ -222,7 +220,6 @@ class Errors:
      else:
          return 0
    else:
-     print("Alpha",k)
      return 1
       
   def names(self,f,m,l):
