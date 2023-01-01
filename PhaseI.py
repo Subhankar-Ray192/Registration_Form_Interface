@@ -8,6 +8,7 @@ from tkinter import messagebox as tmsg
 from tkinter import simpledialog
 
 mKey="123"
+policy="We at our company respect the privacy of our registered canditates.We assure you that your personal information shall not be ,isused.However,we cannot guarantee safety of data incase of 3rd party cyber attacks.We will hold onto your data for security purposes and incase of registration duplicates/frauds."
 
 preDefinedFilePath="D:\\DataFolder\\Data.csv"
 preDefinedDirPath="D:\\DataFolder"
@@ -113,7 +114,7 @@ class Container:
    rObj.append(Radiobutton(self.fc[1] , text="Male" , font=fontStyles[0] , bg=colorPalette[0], variable=gSelect , value=1, command=lambda:self.genderSelect(gSelect.get())))
    rObj.append(Radiobutton(self.fc[1] , text="Others" , font=fontStyles[0] , bg=colorPalette[0] , variable=gSelect , value=2, command=lambda:self.genderSelect(gSelect.get())))
    
-   terms_and_conditions = Checkbutton(self.fc[2], text="By clicking on this button you agree to our terms and conditions."  , bg=colorPalette[0] , font=fontStyles[0])
+   terms_and_conditions = Checkbutton(self.fc[2], text="By clicking on this button you agree to our terms and conditions."+policy  , bg=colorPalette[0] , font=fontStyles[0])
    
    #Layout-Component:Position
    lObj[0].pack(side="top" , pady=(40 , 20))
