@@ -8,7 +8,7 @@ from tkinter import messagebox as tmsg
 from tkinter import simpledialog
 
 mKey="123"
-policy="We at our company respect the privacy of our registered canditates.We assure you that your personal information shall not be ,isused.However,we cannot guarantee safety of data incase of 3rd party cyber attacks.We will hold onto your data for security purposes and incase of registration duplicates/frauds."
+policy="\nWe at our company respect the privacy of our registered canditates."+"\nWe assure you that your personal information shall not be ,misused."+"\nWe can guarantee safety of data incase of third party data breach."
 
 preDefinedFilePath="D:\\DataFolder\\Data.csv"
 preDefinedDirPath="D:\\DataFolder"
@@ -24,7 +24,7 @@ class RegWindow:
 
  def __init__(self):
   self.height=500
-  self.width=550
+  self.width=600
   self.header="TDSSS and Company"
 
  def windows(self):
