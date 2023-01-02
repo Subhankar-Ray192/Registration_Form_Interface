@@ -1,5 +1,5 @@
 # Group_Project:
-Registration Webpage(using Python and GUI,CUI)
+Registration App(using Python and GUI)
 
 # Group Members:
 Tanir Sahoo:        Front-End(UI) Developer ,
