@@ -19,8 +19,9 @@ fontStyles=["Bitter 10"]
 header=["Registration Number:","First Name:","Middle Name:","Last Name:","Contact Number:","Email:","Gender:"]
 err=["0x01:Invalid-Entry","0x02:Invalid-Character","0x03:Compulsory-Entry","0x04:Invalid-Digit"]
 gCategory=["F","M","O"]
+portalWork=0
 
-class RegWindow:
+class Window:
 
  def __init__(self):
   self.height=500
@@ -45,6 +46,9 @@ class Container:
   self.er=Errors()
   self.currGender=""
   return
+ 
+ def fetch_reg_info(self):
+   print("You are trying to fetch the data out of the excel sheet.")
  
  def register(self):
    tmsg.showinfo("register-portal","Register-Portal")
@@ -83,11 +87,11 @@ class Container:
   self.fc[3].configure(bg=colorPalette[0])
   self.fc[3].pack_propagate(0)
 
- def layout(self):
+ def regLayout(self):
    lObj=[]
    
    gSelect=0
-
+ 
    rObj=[]
    
    #Layout-Component:Gen
@@ -136,8 +140,34 @@ class Container:
    rObj[1].grid(row=7 , column=2 , sticky=W , padx=(0 , 0) , pady=(0 , 0))
    rObj[2].grid(row=7 , column=3 , sticky=W , padx=(0 , 0) , pady=(0 , 0))
    terms_and_conditions.grid(row=8 , column=1 , pady=(10 , 0))
-
- def button(self):
+ 
+ def viewLayout(self):
+   lObj=[]
+   
+   lObj.append(Label(self.fc[0] , text="WELCOME TO TDSSS & COMPANY" , fg=colorPalette[0] , bg=colorPalette[1] , font="Courier 18 bold"))
+   lObj.append(Label(self.fc[0] , text="Check your registration status in this portal" , fg=colorPalette[0], bg=colorPalette[1] , font="System 15 bold" , pady=0))
+   lObj.append(Label(self.fc[1], text="Registration Number: ", bg="white", font=fontStyles[0]))
+   
+   e=Entry(self.fc[1], bg=colorPalette[0],font=fontStyles[0], highlightbackground=colorPalette[2],highlightthickness=1)
+   lObj.append(Label(self.fc[3], text="----------------------------------------------------------------------------------------",font=fontStyles[0], bg=colorPalette[0]))
+   lObj.append(Label(self.fc[3], text="This Label is under construction by TDSSS and Company", font=fontStyles[0],bg="white"))
+   lObj.append(Label(self.fc[3], text="----------------------------------------------------------------------------------------",font=fontStyles[0], bg=colorPalette[0]))
+   
+   
+   lObj[0].pack(side="top" , pady=(40 , 20))
+   lObj[1].pack(side="top")
+   lObj[2].grid(row=1, column=1)
+   e.grid(row=1, column=2)
+   self.viewButton()
+   lObj[3].grid(row=1, column=1)
+   lObj[4].grid(row=2, column=1)
+   lObj[5].grid(row=3, column=1)
+  
+ def viewButton(self):
+  btn=Button(self.fc[2], text="Fetch Info", bg=colorPalette[1], fg=colorPalette[0], font=fontStyles[0], padx=10, pady=2, command=lambda:self.fetch_reg_info())
+  btn.grid(row=1, column=1)
+  
+ def regButton(self):
   btn=Button(self.fc[3], text="Register" , command=lambda:self.collectInfo(), bg=colorPalette[1] , fg=colorPalette[0] , padx=208 , pady=10 , font="Bitter 14")
   btn.grid(row=9 , column=1)
  
@@ -160,11 +190,16 @@ class Container:
     self.fh.writeData(self.data)
   self.data.clear()
   
- def conEvent(self):
+ def regEvent(self):
   self.menu()
   self.frameGen(0,500,150) 
-  self.layout()
-  self.button()  
+  self.regLayout()
+  self.regButton()
+
+ def viewEvent(self):
+   self.menu()
+   self.frameGen(0 , 500 , 150)
+   self.viewLayout()
 
 
 class fileHandle:
@@ -304,10 +339,15 @@ class pathManager:
     fileHandle().createFile()
   
 def main():
- RegWindow().windows()
- pathManager().dirHandler()
- Container().conEvent()
- windObj.mainloop()
-
+ print("Press 0:viewPortal(InProgress)")
+ print("Press 1:registrationPortal(Complete)")
+ Window().windows()
+ portalWork=int(input("Enter:"))
+ if(portalWork==1):
+  Container().regEvent()
+  windObj.mainloop()
+ else:
+  Container().viewEvent()
+  windObj.mainloop()
 main()
 
