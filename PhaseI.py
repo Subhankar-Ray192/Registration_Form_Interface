@@ -45,7 +45,7 @@ class Container:
   self.fh=fileHandle()
   self.er=Errors()
   self.currGender=""
-  return
+  self.acceptTC=0
  
  def fetch_reg_info(self):
    print("You are trying to fetch the data out of the excel sheet.")
@@ -93,6 +93,8 @@ class Container:
    gSelect=0
  
    rObj=[]
+  
+   pSelect=0
    
    #Layout-Component:Gen
    lObj.append(Label(self.fc[0] , text="WELCOME TO TDSSS & COMPANY" , fg=colorPalette[0] , bg=colorPalette[1] , font="Courier 18 bold"))
@@ -118,7 +120,8 @@ class Container:
    rObj.append(Radiobutton(self.fc[1] , text="Male" , font=fontStyles[0] , bg=colorPalette[0], variable=gSelect , value=1, command=lambda:self.genderSelect(gSelect.get())))
    rObj.append(Radiobutton(self.fc[1] , text="Others" , font=fontStyles[0] , bg=colorPalette[0] , variable=gSelect , value=2, command=lambda:self.genderSelect(gSelect.get())))
    
-   terms_and_conditions = Checkbutton(self.fc[2], text="By clicking on this button you agree to our terms and conditions."+policy  , bg=colorPalette[0] , font=fontStyles[0])
+   pSelect=IntVar()
+   terms_and_conditions = Checkbutton(self.fc[2], text="By clicking on this button you agree to our terms and conditions."+policy  , bg=colorPalette[0] , font=fontStyles[0],variable=pSelect,onvalue=1,offvalue=0,command=lambda:self.policyS(pSelect))
    
    #Layout-Component:Position
    lObj[0].pack(side="top" , pady=(40 , 20))
@@ -173,6 +176,9 @@ class Container:
  
  def genderSelect(self,value):
   self.currGender=gCategory[value]
+
+ def policyS(self,x):
+  self.acceptTC=x.get()
   
  def collectInfo(self):
   for i in self.eObj:
@@ -186,6 +192,8 @@ class Container:
     tmsg.showinfo("ERROR",err[self.er.phone(self.data[4])])
   elif(self.er.mail(self.data[5])!=5):
     tmsg.showinfo("ERROR",err[self.er.mail(self.data[5])])
+  elif(not self.acceptTC):
+    tmsg.showinfo("ERROR",err[2])
   else:
     self.fh.writeData(self.data)
   self.data.clear()
@@ -323,7 +331,7 @@ class Errors:
    else:
      return True
   
-  
+      
 class pathManager:
   
   def __init__(self):
