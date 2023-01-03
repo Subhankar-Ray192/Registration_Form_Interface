@@ -18,7 +18,7 @@ colorPalette=["#ffffff","#429ef5","#000000"]
 fontStyles=["Bitter 10"]
 header=["Registration Number:","First Name:","Middle Name:","Last Name:","Contact Number:","Email:","Gender:"]
 err=["0x01:Invalid-Entry","0x02:Invalid-Character","0x03:Compulsory-Entry","0x04:Invalid-Digit"]
-gCategory=["F","M","O"]
+gCategory=["Female","Male","Others"]
 portalWork=0
 
 class Window:
@@ -99,26 +99,16 @@ class Container:
    #Layout-Component:Gen
    lObj.append(Label(self.fc[0] , text="WELCOME TO TDSSS & COMPANY" , fg=colorPalette[0] , bg=colorPalette[1] , font="Courier 18 bold"))
    lObj.append(Label(self.fc[0] , text="Please complete your registration" , fg=colorPalette[0] , bg=colorPalette[1] , font="System 15 bold" , pady=0))
-   lObj.append(Label(self.fc[1] , text=header[0], font=fontStyles[0] , bg=colorPalette[0]))
-   lObj.append(Label(self.fc[1] , text=header[1], font=fontStyles[0] , bg=colorPalette[0]))
-   lObj.append(Label(self.fc[1] , text=header[2], font=fontStyles[0] , bg=colorPalette[0]))
-   lObj.append(Label(self.fc[1] , text=header[3], font=fontStyles[0], bg=colorPalette[0])) 
-   lObj.append(Label(self.fc[1] , text=header[4], font=fontStyles[0] , bg=colorPalette[0])) 
-   lObj.append(Label(self.fc[1], text=header[5] , font=fontStyles[0] , bg=colorPalette[0]))
-   lObj.append(Label(self.fc[1] , text=header[6], font=fontStyles[0] , bg=colorPalette[0]))
+   for i in range(7):
+    lObj.append(Label(self.fc[1] , text=header[i], font=fontStyles[0] , bg=colorPalette[0]))
    
-   self.eObj.append(Entry(self.fc[1],font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
-   self.eObj.append(Entry(self.fc[1] , font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
-   self.eObj.append(Entry(self.fc[1] , font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
-   self.eObj.append(Entry(self.fc[1], font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
-   self.eObj.append(Entry(self.fc[1], font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
-   self.eObj.append(Entry(self.fc[1], font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
+   for i in range(6):
+    self.eObj.append(Entry(self.fc[1],font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
    
    gSelect=IntVar()
    gSelect.set("None")
-   rObj.append(Radiobutton(self.fc[1], text="Female" , font=fontStyles[0] , bg=colorPalette[0] , variable=gSelect , value=0, command=lambda:self.genderSelect(gSelect.get())))
-   rObj.append(Radiobutton(self.fc[1] , text="Male" , font=fontStyles[0] , bg=colorPalette[0], variable=gSelect , value=1, command=lambda:self.genderSelect(gSelect.get())))
-   rObj.append(Radiobutton(self.fc[1] , text="Others" , font=fontStyles[0] , bg=colorPalette[0] , variable=gSelect , value=2, command=lambda:self.genderSelect(gSelect.get())))
+   for i in range(3):
+    rObj.append(Radiobutton(self.fc[1], text=gCategory[i] , font=fontStyles[0] , bg=colorPalette[0] , variable=gSelect , value=i, command=lambda:self.genderSelect(gSelect.get())))
    
    pSelect=IntVar()
    terms_and_conditions = Checkbutton(self.fc[2], text="By clicking on this button you agree to our terms and conditions."+policy  , bg=colorPalette[0] , font=fontStyles[0],variable=pSelect,onvalue=1,offvalue=0,command=lambda:self.policyS(pSelect))
