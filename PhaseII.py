@@ -19,7 +19,7 @@ fontStyles=["Bitter 10"]
 header=["Registration Number:","First Name:","Middle Name:","Last Name:","Contact Number:","Email:","Gender:"]
 err=["0x01:Invalid-Entry","0x02:Invalid-Character","0x03:Compulsory-Entry","0x04:Invalid-Digit"]
 gCategory=["Female","Male","Others"]
-portalWork=0
+
 
 class Window:
 
@@ -41,7 +41,6 @@ class Container:
   self.menuNm=["Register","View","Menu","Master Terminal","Admin"]
   self.fc=[]
   self.data=[]
-  self.eObj=[]
   self.fh=fileHandle()
   self.er=Errors()
   self.currGender=""
@@ -51,10 +50,22 @@ class Container:
    print("You are trying to fetch the data out of the excel sheet.")
  
  def register(self):
-   tmsg.showinfo("register-portal","Register-Portal")
-
+   #tmsg.showinfo("register-portal","Register-Portal")
+   self.frameClear()
+   self.regEvent()
+   return
+ 
+ def frameClear(self):
+  for i in self.fc:
+   for widgets in i.winfo_children():
+     widgets.destroy()
+    
+ 
  def view(self):
-   tmsg.showinfo("view-portal","View-Portal") 
+   #tmsg.showinfo("view-portal","View-Portal")
+   self.frameClear()
+   self.viewEvent()
+   return 
 
  def menu(self):
   yourmenu = Menu(windObj)
@@ -95,6 +106,8 @@ class Container:
    rObj=[]
   
    pSelect=0
+
+   eObj=[]
    
    #Layout-Component:Gen
    lObj.append(Label(self.fc[0] , text="WELCOME TO TDSSS & COMPANY" , fg=colorPalette[0] , bg=colorPalette[1] , font="Courier 18 bold"))
@@ -103,8 +116,8 @@ class Container:
     lObj.append(Label(self.fc[1] , text=header[i], font=fontStyles[0] , bg=colorPalette[0]))
    
    for i in range(6):
-    self.eObj.append(Entry(self.fc[1],font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
-   
+    eObj.append(Entry(self.fc[1],font=fontStyles[0] , highlightbackground=colorPalette[2], highlightthickness=1))
+    
    gSelect=IntVar()
    gSelect.set("None")
    for i in range(3):
@@ -117,22 +130,23 @@ class Container:
    lObj[0].pack(side="top" , pady=(40 , 20))
    lObj[1].pack(side="top")
    lObj[2].grid(row=1 , column=1 , sticky=W , pady=(20,0))
-   self.eObj[0].grid(row=1 , column=2 , pady=(20,0) , padx=(5,0))
+   eObj[0].grid(row=1 , column=2 , pady=(20,0) , padx=(5,0))
    lObj[3].grid(row=2 , column=1 , sticky=W , pady=(20,0) , padx=(0 , 5))
-   self.eObj[1].grid(row=3 , column=1 , sticky=W , pady=(10 , 0) , padx=(0 , 5))   
+   eObj[1].grid(row=3 , column=1 , sticky=W , pady=(10 , 0) , padx=(0 , 5))   
    lObj[4].grid(row=2 , column=2 , sticky=W , pady=(20,0) , padx=5)
-   self.eObj[2].grid(row=3 , column=2 , sticky=W , pady=(10 , 0) , padx=5)   
+   eObj[2].grid(row=3 , column=2 , sticky=W , pady=(10 , 0) , padx=5)   
    lObj[5].grid(row=2 , column=3 , sticky=W , pady=(20,0) , padx=5)
-   self.eObj[3].grid(row=3 , column=3 , sticky=W , pady=(10 , 0) , padx=5)
+   eObj[3].grid(row=3 , column=3 , sticky=W , pady=(10 , 0) , padx=5)
    lObj[6].grid(row=4 , column=1 , sticky=W , pady=(20,0))
-   self.eObj[4].grid(row=4 , column=2 , sticky=W , pady=(20 , 0) , padx=(5 , 0))
+   eObj[4].grid(row=4 , column=2 , sticky=W , pady=(20 , 0) , padx=(5 , 0))
    lObj[7].grid(row=5 , column=1 , sticky=W , pady=(20 , 0))
-   self.eObj[5].grid(row=5 , column=2 , sticky=W , pady=(20 , 0) , padx=(5 , 0))
+   eObj[5].grid(row=5 , column=2 , sticky=W , pady=(20 , 0) , padx=(5 , 0))
    lObj[8].grid(row=6 , column=1 , sticky=W , pady=(20 , 0))
    rObj[0].grid(row=7 , column=1 , sticky=W , padx=(0 , 0) , pady=(0 , 0))
    rObj[1].grid(row=7 , column=2 , sticky=W , padx=(0 , 0) , pady=(0 , 0))
    rObj[2].grid(row=7 , column=3 , sticky=W , padx=(0 , 0) , pady=(0 , 0))
    terms_and_conditions.grid(row=8 , column=1 , pady=(10 , 0))
+   self.regButton(eObj)
  
  def viewLayout(self):
    lObj=[]
@@ -160,8 +174,8 @@ class Container:
   btn=Button(self.fc[2], text="Fetch Info", bg=colorPalette[1], fg=colorPalette[0], font=fontStyles[0], padx=10, pady=2, command=lambda:self.fetch_reg_info())
   btn.grid(row=1, column=1)
   
- def regButton(self):
-  btn=Button(self.fc[3], text="Register" , command=lambda:self.collectInfo(), bg=colorPalette[1] , fg=colorPalette[0] , padx=208 , pady=10 , font="Bitter 14")
+ def regButton(self,eObj):
+  btn=Button(self.fc[3], text="Register" , command=lambda:self.collectInfo(eObj), bg=colorPalette[1] , fg=colorPalette[0] , padx=208 , pady=10 , font="Bitter 14")
   btn.grid(row=9 , column=1)
  
  def genderSelect(self,value):
@@ -170,8 +184,8 @@ class Container:
  def policyS(self,x):
   self.acceptTC=x.get()
   
- def collectInfo(self):
-  for i in self.eObj:
+ def collectInfo(self,eObj):
+  for i in eObj:
     self.data.append(i.get())
   self.data.append(self.currGender)
   if(self.er.reg(self.data[0])!=5):
@@ -192,11 +206,10 @@ class Container:
   self.menu()
   self.frameGen(0,500,150) 
   self.regLayout()
-  self.regButton()
 
  def viewEvent(self):
    self.menu()
-   self.frameGen(0 , 500 , 150)
+   self.frameGen(0,500,150)
    self.viewLayout()
 
 
@@ -337,15 +350,9 @@ class pathManager:
     fileHandle().createFile()
   
 def main():
- print("Press 0:viewPortal(InProgress)")
- print("Press 1:registrationPortal(Complete)")
  Window().windows()
- portalWork=int(input("Enter:"))
- if(portalWork==1):
-  Container().regEvent()
-  windObj.mainloop()
- else:
-  Container().viewEvent()
-  windObj.mainloop()
+ #portalWork=int(input("Enter:"))
+ Container().regEvent()
+ windObj.mainloop()
 main()
 
