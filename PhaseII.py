@@ -153,7 +153,7 @@ class Container:
    
    lObj.append(Label(self.fc[0] , text="WELCOME TO TDSSS & COMPANY" , fg=colorPalette[0] , bg=colorPalette[1] , font="Courier 18 bold"))
    lObj.append(Label(self.fc[0] , text="Check your registration status in this portal" , fg=colorPalette[0], bg=colorPalette[1] , font="System 15 bold" , pady=0))
-   lObj.append(Label(self.fc[1], text="Registration Number: ", bg="white", font=fontStyles[0]))
+   lObj.append(Label(self.fc[1], text=header[0], bg=colorPalette[0], font=fontStyles[0]))
    
    e=Entry(self.fc[1], bg=colorPalette[0],font=fontStyles[0], highlightbackground=colorPalette[2],highlightthickness=1)
    lObj.append(Label(self.fc[3], text="----------------------------------------------------------------------------------------",font=fontStyles[0], bg=colorPalette[0]))
@@ -351,7 +351,6 @@ class pathManager:
   
 def main():
  Window().windows()
- #portalWork=int(input("Enter:"))
  Container().regEvent()
  windObj.mainloop()
 main()
