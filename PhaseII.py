@@ -15,7 +15,7 @@ preDefinedDirPath="D:\\DataFolder"
 
 windObj = Tk()
 colorPalette=["#ffffff","#429ef5","#000000"]
-fontStyles=["Bitter 10"]
+fontStyles=["Bitter 10","System 15 bold","Courier 18 bold"]
 header=["Registration Number:","First Name:","Middle Name:","Last Name:","Contact Number:","Email:","Gender:"]
 err=["0x01:Invalid-Entry","0x02:Invalid-Character","0x03:Compulsory-Entry","0x04:Invalid-Digit"]
 gCategory=["Female","Male","Others"]
@@ -46,8 +46,22 @@ class Container:
   self.currGender=""
   self.acceptTC=0
  
- def fetch_reg_info(self):
+ def fetch_reg_info(self,eObj):
+   lObj=[]
    print("You are trying to fetch the data out of the excel sheet.")
+   rows=[]
+   rows=self.fh.readData()
+   row=[]
+   row=rows[self.fh.searchData(eObj.get(),0)]
+    
+   #Front-End
+   lObj.append(Label(self.fc[3], text=header[0]+row[0],font=fontStyles[0], bg=colorPalette[0]))
+   lObj.append(Label(self.fc[3], text=header[1]+row[1], font=fontStyles[0],bg="white"))
+   lObj.append(Label(self.fc[3], text=header[2]+row[2],font=fontStyles[0], bg=colorPalette[0]))
+   lObj[0].grid(row=1, column=1)
+   lObj[1].grid(row=2, column=1)
+   lObj[2].grid(row=3, column=1)
+   
  
  def register(self):
    #tmsg.showinfo("register-portal","Register-Portal")
@@ -110,8 +124,8 @@ class Container:
    eObj=[]
    
    #Layout-Component:Gen
-   lObj.append(Label(self.fc[0] , text="WELCOME TO TDSSS & COMPANY" , fg=colorPalette[0] , bg=colorPalette[1] , font="Courier 18 bold"))
-   lObj.append(Label(self.fc[0] , text="Please complete your registration" , fg=colorPalette[0] , bg=colorPalette[1] , font="System 15 bold" , pady=0))
+   lObj.append(Label(self.fc[0] , text="WELCOME TO TDSSS & COMPANY" , fg=colorPalette[0] , bg=colorPalette[1] , font=fontStyles[2]))
+   lObj.append(Label(self.fc[0] , text="Please complete your registration" , fg=colorPalette[0] , bg=colorPalette[1] , font=fontStyles[1] , pady=0))
    for i in range(7):
     lObj.append(Label(self.fc[1] , text=header[i], font=fontStyles[0] , bg=colorPalette[0]))
    
@@ -151,27 +165,22 @@ class Container:
  def viewLayout(self):
    lObj=[]
    
-   lObj.append(Label(self.fc[0] , text="WELCOME TO TDSSS & COMPANY" , fg=colorPalette[0] , bg=colorPalette[1] , font="Courier 18 bold"))
-   lObj.append(Label(self.fc[0] , text="Check your registration status in this portal" , fg=colorPalette[0], bg=colorPalette[1] , font="System 15 bold" , pady=0))
+   lObj.append(Label(self.fc[0] , text="WELCOME TO TDSSS & COMPANY" , fg=colorPalette[0] , bg=colorPalette[1] , font=fontStyles[2]))
+   lObj.append(Label(self.fc[0] , text="Check your registration status in this portal" , fg=colorPalette[0], bg=colorPalette[1] , font=fontStyles[1] , pady=0))
    lObj.append(Label(self.fc[1], text=header[0], bg=colorPalette[0], font=fontStyles[0]))
    
-   e=Entry(self.fc[1], bg=colorPalette[0],font=fontStyles[0], highlightbackground=colorPalette[2],highlightthickness=1)
-   lObj.append(Label(self.fc[3], text="----------------------------------------------------------------------------------------",font=fontStyles[0], bg=colorPalette[0]))
-   lObj.append(Label(self.fc[3], text="This Label is under construction by TDSSS and Company", font=fontStyles[0],bg="white"))
-   lObj.append(Label(self.fc[3], text="----------------------------------------------------------------------------------------",font=fontStyles[0], bg=colorPalette[0]))
+   eObj=Entry(self.fc[1], bg=colorPalette[0],font=fontStyles[0], highlightbackground=colorPalette[2],highlightthickness=1)
    
+   row=[]
    
    lObj[0].pack(side="top" , pady=(40 , 20))
    lObj[1].pack(side="top")
    lObj[2].grid(row=1, column=1)
-   e.grid(row=1, column=2)
-   self.viewButton()
-   lObj[3].grid(row=1, column=1)
-   lObj[4].grid(row=2, column=1)
-   lObj[5].grid(row=3, column=1)
+   eObj.grid(row=1, column=2)
+   self.viewButton(eObj)
   
- def viewButton(self):
-  btn=Button(self.fc[2], text="Fetch Info", bg=colorPalette[1], fg=colorPalette[0], font=fontStyles[0], padx=10, pady=2, command=lambda:self.fetch_reg_info())
+ def viewButton(self,eObj):
+  btn=Button(self.fc[2], text="Fetch Info", bg=colorPalette[1], fg=colorPalette[0], font=fontStyles[0], padx=10, pady=2, command=lambda:self.fetch_reg_info(eObj))
   btn.grid(row=1, column=1)
   
  def regButton(self,eObj):
@@ -201,6 +210,11 @@ class Container:
   else:
     self.fh.writeData(self.data)
   self.data.clear()
+  self.refresh(eObj)
+
+ def refresh(self,eObj):
+  for i in eObj:
+   i.delete(0,END) 
   
  def regEvent(self):
   self.menu()
@@ -225,7 +239,7 @@ class fileHandle:
   
   def writeData(self,data):
    print("Data:",data)
-   if(not self.isRepeatEntry(data)):
+   if(self.searchData(data[0],0)==-1):
     f=open(preDefinedFilePath,"a",newline="")
     csvWriter=csv.writer(f)
     csvWriter.writerow(data)
@@ -248,14 +262,6 @@ class fileHandle:
    if(key==mKey):
     os.system(r"D:\\DataFolder\\Data.csv")
    dialogueBox.destroy()
-  
-  def isRepeatEntry(self,data):
-   rows=[]
-   rows=np.array(self.readData())
-   for i in range(len(rows)):
-    if((rows[i][0]==data[0])or(rows[i][5]==data[5])):
-     return True
-   return False
 
   def readData(self):
    f=open(preDefinedFilePath,"r")
@@ -266,6 +272,14 @@ class fileHandle:
      rows.append(i)
    f.close()
    return rows
+   
+  def searchData(self,x,j):
+   rows=[]
+   rows=np.array(self.readData())
+   for i in range(len(rows)):
+    if(rows[i][j]==x):
+     return i
+   return -1
   
 class Errors:
   
