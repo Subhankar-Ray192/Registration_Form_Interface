@@ -1,8 +1,8 @@
 # What makes this Registration App useful?
 
-This Registration App has a tinge of blue & white reminisces of the open sky and the freedom it offers to our users and to make it a reality we have worked hard to present to you a app that will serve our users well and  will not let them face inconvenient bugs that can hinder work flow. 
+This Registration App has a tinge of blue & white reminisces of the open sky and the freedom it offers to our users and to make it a reality we have worked hard to present to you a app that will serve our users well and  will not let them face inconvenient bugs that can hinder work flow because: 
 
-                                                            "Because we understand the value of our time."
+                                                     "We understand the value of your time."
 
 # Group Members:
 Tanir Sahoo:          Front-End(UI) Developer ,<br />
