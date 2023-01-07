@@ -6,7 +6,7 @@ Tanir Sahoo:          Front-End(UI) Developer ,
 Subhankar Ray:        Back-End(Data Integration & File Handling) Developer and Managing ,
 Dyutiprovo Sarkar:    Back-End(Error Analysis) Developer and Planning ,
 Soumaydeep Samanta:   Front-End(Error-Analysis) Developer ,
-Sankho Subhro Moitra: Tester .
+Shankho Subhra Moitra: Tester .
 
 # Synopsis:
             "Creating a regristration app module for professional use,using Python:GUI."
