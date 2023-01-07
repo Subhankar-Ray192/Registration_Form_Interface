@@ -8,7 +8,7 @@ Dyutiprovo Sarkar:  Back-End(Error Analysis) Developer and Planning ,
 Soumaydeep Samanta: Front-End(Error-Analysis) Developer .
 
 # Synopsis:
-            "Creating a regristration app for a company,using Python and GUI."
+            "Creating a regristration app module for professional use,using Python:GUI."
 
 The vision of this project is to create an app that enables all users to register for a certain company,whilst providing essential details/information for the registration process.
 
@@ -16,4 +16,4 @@ In today's modern era,the old pen and paper methods of registration have become 
 
 One of the key featues of this product is that it can also generate a persistance list of all the registered candidates,which could be accessed by the user in a later time.
 
-This app's creation shall involve usage of python module:tkinter,csvreader,os,numpy.
+This app's creation involves the usage of python module:tkinter,csvreader,os,numpy.
