@@ -1,6 +1,8 @@
 # What makes this Registration App useful?
 
-This Registration App has nothing out of the ordinary,however,we have taken great care to ensure that companies or users using this app will experience optimal features and will not face inconvenient bugs that can hinder work flow.
+This Registration App has a tinge of blue & white reminisces of the open sky and the freedom it offers to our users and to make it a reality we have worked hard to present to you a app that will serve our users well and  will not let them face inconvenient bugs that can hinder work flow. 
+
+                                                            "Because we understand the value of our time."
 
 # Group Members:
 Tanir Sahoo:          Front-End(UI) Developer ,<br />
@@ -42,14 +44,13 @@ numpy: .<br/>
 
 Front-End:<br />
 1. Window:(Root Object),<br />
-2. Frame:(UI-Element Container Object),<br />
-3. Label-Frame(UI-Container --> Element:Labels)<br />
-4. Label:(UI Text-Element),<br />
-5. Button(UI Action Element),<br/>
-6. Entry(UI Event-Listening Element),<br />
-7. Listbox(UI Dropdown Element),<br />
-8. Radio-Button(UI Choice-Based Action Element),<br />
-9. Checkbox(UI Choice-Based Action Element).<br />
+1.1. Frame:(UI-Element Container Object),<br />
+1.1.1. Label:(UI Text-Element),<br />
+1.1.2. Button(UI Action Element),<br/>
+1.1.3. Entry(UI Event-Listening Element),<br />
+1.1.4. Listbox(UI Dropdown Element),<br />
+1.1.5. Radio-Button(UI Choice-Based Action Element),<br />
+1.1.6. Checkbox(UI Choice-Based Action Element).<br />
 
 # Advantages of using this app:
 
