@@ -268,15 +268,24 @@ class Container:
   #if(self.er.reg(self.data[0])!=5):
     #tmsg.showinfo("ERROR",err[self.er.reg(self.data[0])])
   if(self.er.names(self.data[0],self.data[1],self.data[2])!=5):
-    tmsg.showinfo("ERROR",err[self.er.names(self.data[0],self.data[1],self.data[2])])
+      if(self.er.names(self.data[0],self.data[1],self.data[2])==1):
+          tmsg.showinfo("ERROR",err[0])
+      elif(self.er.names(self.data[0],self.data[1],self.data[2])==2):
+          tmsg.showinfo("ERROR",err[1])
   elif(self.er.names(self.data[3],self.data[4],self.data[5])!=5):
-    tmsg.showinfo("ERROR",err[self.er.names(self.data[3],self.data[4],self.data[5])])
+      if(self.er.names(self.data[3],self.data[4],self.data[5])==1):
+          tmsg.showinfo("ERROR",err[0])
+      elif(self.er.names(self.data[3],self.data[4],self.data[5])==2):
+          tmsg.showinfo("ERROR",err[1])
   elif(self.er.phone(self.data[7])!=5):
-    tmsg.showinfo("ERROR",err[self.er.phone(self.data[4])])
+      if(self.er.phone(self.data[7])==0):
+          tmsg.showinfo("ERROR",err[2])
+      else:
+          tmsg.showinfo("ERROR",err[3])
   elif(self.er.mail(self.data[8])!=5):
-    tmsg.showinfo("ERROR",err[self.er.mail(self.data[5])])
-  elif(not self.acceptTC):
-    tmsg.showinfo("ERROR",err[2])
+    tmsg.showinfo("ERROR",err[4])
+  #elif(not self.acceptTC):
+    #tmsg.showinfo("ERROR",err[2])
   else:
    self.fh.writeData(self.data)
   self.data.clear()
@@ -361,26 +370,20 @@ class fileHandle:
   
 class Errors:
   
-  def reg(self,num):
-   k=num.isalnum()
-   c=0
-   if k==True:
-     if len(num)==5:
-       for i in num:
-        if (i.isdigit()):
-          c=c+1
-       if c==3:
-        return 5
-       else:
-        return 1
+  def address(self,a):
+    if len(a)>30:
+      return 1
      else:
-         return 0
-   else:
-     return 1
-      
+      return 5
+   
+  def pin(self,n):
+    if len(n)==7 and n.isdigit() is True:
+      return 5
+     else:
+      return 1
   def names(self,f,m,l):
    if len(f)==0 or len(l)==0:
-     return 2
+     return 1
    else:
      f1=f.isalpha()
      l1=l.isalpha()
@@ -394,12 +397,13 @@ class Errors:
          if f2 is True and m2 is True and l2 is True:
            return 5
      else:
-       if f1 is True and l1 is True:
-         f2=f.isupper()
-         l2=l.isupper()
-         if f2 is True and l2 is True:
-           return 5
-   return 1
+           if f1 is True and l1 is True:
+               f2=f.isupper()
+               l2=l.isupper()
+               if f2 is True and l2 is True:
+                   return 5
+           return 2
+   return 1 
          
   def phone(self,n):
    if len(n)<10 or len(n)>10:
@@ -413,7 +417,7 @@ class Errors:
             
   def mail(self,e):
    if len(e)==0:
-     return 2
+     return 4
    else:
      return 5
       
