@@ -68,8 +68,8 @@ class Container:
     row=rows[self.fh.searchData(eObj.get(),10)]
     
     #Label:Info
-    lObj.append(Label(self.fc[3] , text=str(row[0]+row[1]+row[2]), bg=colorPalette[0], font=fontStyles[0]))
-    lObj.append(Label(self.fc[3] , text=str(row[3]+row[4]+row[5]), bg=colorPalette[0], font=fontStyles[0]))
+    lObj.append(Label(self.fc[3] , text=str(row[0]+" "+row[1]+" "+row[2]), bg=colorPalette[0], font=fontStyles[0]))
+    lObj.append(Label(self.fc[3] , text=str(row[3]+" "+row[4]+" "+row[5]), bg=colorPalette[0], font=fontStyles[0]))
     lObj.append(Label(self.fc[3] , text=row[6], bg=colorPalette[0], font=fontStyles[0]))
     lObj.append(Label(self.fc[3] , text=row[7], bg=colorPalette[0], font=fontStyles[0]))
     lObj.append(Label(self.fc[3] , text=row[8], bg=colorPalette[0], font=fontStyles[0]))
@@ -393,16 +393,13 @@ class Errors:
          m2=m.isupper()
          if f2 is True and m2 is True and l2 is True:
            return 5
-         else:
-           return 1
      else:
        if f1 is True and l1 is True:
          f2=f.isupper()
          l2=l.isupper()
          if f2 is True and l2 is True:
            return 5
-         else:
-           return 1
+   return 1
          
   def phone(self,n):
    if len(n)<10 or len(n)>10:
