@@ -24,7 +24,7 @@ header=["First Name:","Middle Name:","Last Name:","First Name:","Middle Name:","
 
 can_details=["Candidates name:" , "Guardian's name: " ,  "Address: " , "Contact number: " , "Email-id: " , "Gender: " , "Registration Status: "]
 
-err=["Name is Compulsory","Invalid Name. Only Characters Allowed","Invalid Phone Numer","Only Digits Allowed in Phone Number","Mail ID Compulsory"]
+err=["0x01:Invalid-Entry","0x02:Invalid-Character","0x03:Compulsory-Entry","0x04:Invalid-Digit"]
 gCategory=["Female","Male","Others"]
 
 regStatus=["Valid","Invalid"]
@@ -370,23 +370,17 @@ class fileHandle:
   
 class Errors:
   
-  def reg(self,num):
-   k=num.isalnum()
-   c=0
-   if k==True:
-     if len(num)==5:
-       for i in num:
-        if (i.isdigit()):
-          c=c+1
-       if c==3:
-        return 5
-       else:
-        return 1
+  def address(self,a):
+    if len(a)>30:
+      return 1
      else:
-         return 0
-   else:
-     return 1
-      
+      return 5
+   
+  def pin(self,n):
+    if len(n)==7 and n.isdigit() is True:
+      return 5
+     else:
+      return 1
   def names(self,f,m,l):
    if len(f)==0 or len(l)==0:
      return 1
