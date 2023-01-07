@@ -403,6 +403,7 @@ class Errors:
                if f2 is True and l2 is True:
                    return 5
            return 2
+   return 1 
          
   def phone(self,n):
    if len(n)<10 or len(n)>10:
