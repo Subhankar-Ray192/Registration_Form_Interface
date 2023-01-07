@@ -370,22 +370,17 @@ class fileHandle:
   
 class Errors:
   
-  def reg(self,num):
-   k=num.isalnum()
-   c=0
-   if k==True:
-     if len(num)==5:
-       for i in num:
-        if (i.isdigit()):
-          c=c+1
-       if c==3:
-        return 5
-       else:
-        return 1
-     else:
-         return 0
+  def address(self,a):
+   if len(a)>30:
+      return 1
    else:
-     return 1
+      return 5
+   
+  def pin(self,n):
+   if len(n)==7 and n.isdigit() is True:
+      return 5
+   else:
+      return 1
       
   def names(self,f,m,l):
    if len(f)==0 or len(l)==0:
