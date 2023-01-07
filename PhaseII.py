@@ -24,7 +24,7 @@ header=["First Name:","Middle Name:","Last Name:","First Name:","Middle Name:","
 
 can_details=["Candidates name:" , "Guardian's name: " ,  "Address: " , "Contact number: " , "Email-id: " , "Gender: " , "Registration Status: "]
 
-err=["0x01:Invalid-Entry","0x02:Invalid-Character","0x03:Compulsory-Entry","0x04:Invalid-Digit"]
+err=["Name is Compulsory","Invalid Name. Only Characters Allowed","Invalid Phone Numer","Only Digits Allowed in Phone Number","Mail ID Compulsory"]
 gCategory=["Female","Male","Others"]
 
 regStatus=["Valid","Invalid"]
@@ -68,8 +68,8 @@ class Container:
     row=rows[self.fh.searchData(eObj.get(),10)]
     
     #Label:Info
-    lObj.append(Label(self.fc[3] , text=str(row[0]+row[1]+row[2]), bg=colorPalette[0], font=fontStyles[0]))
-    lObj.append(Label(self.fc[3] , text=str(row[3]+row[4]+row[5]), bg=colorPalette[0], font=fontStyles[0]))
+    lObj.append(Label(self.fc[3] , text=str(row[0]+" "+row[1]+" "+row[2]), bg=colorPalette[0], font=fontStyles[0]))
+    lObj.append(Label(self.fc[3] , text=str(row[3]+" "+row[4]+" "+row[5]), bg=colorPalette[0], font=fontStyles[0]))
     lObj.append(Label(self.fc[3] , text=row[6], bg=colorPalette[0], font=fontStyles[0]))
     lObj.append(Label(self.fc[3] , text=row[7], bg=colorPalette[0], font=fontStyles[0]))
     lObj.append(Label(self.fc[3] , text=row[8], bg=colorPalette[0], font=fontStyles[0]))
@@ -268,15 +268,24 @@ class Container:
   #if(self.er.reg(self.data[0])!=5):
     #tmsg.showinfo("ERROR",err[self.er.reg(self.data[0])])
   if(self.er.names(self.data[0],self.data[1],self.data[2])!=5):
-    tmsg.showinfo("ERROR",err[self.er.names(self.data[0],self.data[1],self.data[2])])
+      if(self.er.names(self.data[0],self.data[1],self.data[2])==1):
+          tmsg.showinfo("ERROR",err[0])
+      elif(self.er.names(self.data[0],self.data[1],self.data[2])==2):
+          tmsg.showinfo("ERROR",err[1])
   elif(self.er.names(self.data[3],self.data[4],self.data[5])!=5):
-    tmsg.showinfo("ERROR",err[self.er.names(self.data[3],self.data[4],self.data[5])])
+      if(self.er.names(self.data[3],self.data[4],self.data[5])==1):
+          tmsg.showinfo("ERROR",err[0])
+      elif(self.er.names(self.data[3],self.data[4],self.data[5])==2):
+          tmsg.showinfo("ERROR",err[1])
   elif(self.er.phone(self.data[7])!=5):
-    tmsg.showinfo("ERROR",err[self.er.phone(self.data[4])])
+      if(self.er.phone(self.data[7])==0):
+          tmsg.showinfo("ERROR",err[2])
+      else:
+          tmsg.showinfo("ERROR",err[3])
   elif(self.er.mail(self.data[8])!=5):
-    tmsg.showinfo("ERROR",err[self.er.mail(self.data[5])])
-  elif(not self.acceptTC):
-    tmsg.showinfo("ERROR",err[2])
+    tmsg.showinfo("ERROR",err[4])
+  #elif(not self.acceptTC):
+    #tmsg.showinfo("ERROR",err[2])
   else:
    self.fh.writeData(self.data)
   self.data.clear()
@@ -380,7 +389,7 @@ class Errors:
       
   def names(self,f,m,l):
    if len(f)==0 or len(l)==0:
-     return 2
+     return 1
    else:
      f1=f.isalpha()
      l1=l.isalpha()
@@ -393,16 +402,13 @@ class Errors:
          m2=m.isupper()
          if f2 is True and m2 is True and l2 is True:
            return 5
-         else:
-           return 1
      else:
-       if f1 is True and l1 is True:
-         f2=f.isupper()
-         l2=l.isupper()
-         if f2 is True and l2 is True:
-           return 5
-         else:
-           return 1
+           if f1 is True and l1 is True:
+               f2=f.isupper()
+               l2=l.isupper()
+               if f2 is True and l2 is True:
+                   return 5
+           return 2
          
   def phone(self,n):
    if len(n)<10 or len(n)>10:
@@ -416,7 +422,7 @@ class Errors:
             
   def mail(self,e):
    if len(e)==0:
-     return 2
+     return 4
    else:
      return 5
       
