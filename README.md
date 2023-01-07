@@ -47,7 +47,7 @@ Front-End:<br />
 4. Label:(UI Text-Element),<br />
 5. Button(UI Action Element),<br/>
 6. Entry(UI Event-Listening Element),<br />
-7. Listbox(UI Dropdown Element),<br />,
+7. Listbox(UI Dropdown Element),<br />
 8. Radio-Button(UI Choice-Based Action Element),<br />
 9. Checkbox(UI Choice-Based Action Element).<br />
 
@@ -57,6 +57,6 @@ a. Gain deeper candidate knowledge,<br />
 b. Make applicant comparison easier(job application specific),<br />
 c. Flexibility of background checks as well as applications.<br />
 
-#Future -Updates:
+# Future -Updates:
 
 To conclude,this app is a prototype and serves as the base model for several already running registration apps.This app aims to provide the best user experience as well as the simplest registration mechanism and an easier time for the managers.
