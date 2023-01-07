@@ -24,7 +24,7 @@ header=["First Name:","Middle Name:","Last Name:","First Name:","Middle Name:","
 
 can_details=["Candidates name:" , "Guardian's name: " ,  "Address: " , "Contact number: " , "Email-id: " , "Gender: " , "Registration Status: "]
 
-err=["Name is Compulsory","Invalid Name. Only Characters Allowed","Invalid Phone Numer","Only Digits Allowed in Phone Number","Mail ID Compulsory"]
+err=["Name is Compulsory","Invalid Name. Only Characters Allowed","Invalid Phone Numer","Only Digits Allowed in Phone Number","Mail ID Compulsory","Invalid Address"]
 gCategory=["Female","Male","Others"]
 
 regStatus=["Valid","Invalid"]
@@ -277,6 +277,8 @@ class Container:
           tmsg.showinfo("ERROR",err[0])
       elif(self.er.names(self.data[3],self.data[4],self.data[5])==2):
           tmsg.showinfo("ERROR",err[1])
+  elif(self.er.address(self.data[6]!=5)):
+          tmsg.showinfo("ERROR",err[5])
   elif(self.er.phone(self.data[7])!=5):
       if(self.er.phone(self.data[7])==0):
           tmsg.showinfo("ERROR",err[2])
@@ -371,8 +373,8 @@ class fileHandle:
 class Errors:
   
   def address(self,a):
-   if len(a)>30:
-      return 1
+   if a==None:
+      return 6
    else:
       return 5
    
