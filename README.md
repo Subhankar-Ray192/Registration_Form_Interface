@@ -12,15 +12,17 @@ Shankho Subhra Moitra: Tester .<br />
             "Creating a regristration app module for professional use,using Python:GUI."
 
 The vision of this project is to create an app that enables all users to register for a certain company,whilst providing essential details/information for the registration process.
-<br />
+
 In today's modern era,the old pen and paper methods of registration have become suboptimal when compared with their electronic counterpart viz apps and webpages.Thus,catering to the usefulness and availability of resources,we have chosen tho generalise the basic module as much as we could for ease of convenience of our users.
-<br />
+
 One of the key featues of this product is that it can also generate a persistance list of all the registered candidates,which could be accessed by the designated managers and authorities at a later time.
-<br/>
+
 The project can be broadly classified into two parts:<br />Front-End(UI/HI/UX), <br />Back-End(concerned with logical implementation of the useful features).
-<br />
-This app's creation involves the usage of python 
+
+This app's creation involves the usage of python
+
 #Modules/Libraries(in-built):
+
 tkinter: tkinter is one of the more popular python libraries is used for this project, offering us a number of standard GUI building blocks.,<br />
 csvreader,<br />
 os,<br />
