@@ -1,5 +1,6 @@
-# Group_Project:
-Registration App(using Python-GUI)
+# What makes this Registration App useful?
+
+This Registration App has nothing out of the ordinary,however,we have taken great care to ensure that companies or users using this app will experience optimal features and will not face inconvenient bugs that can hinder work flow.
 
 # Group Members:
 Tanir Sahoo:          Front-End(UI) Developer ,<br />
@@ -26,8 +27,10 @@ This app's creation involves the usage of python
 tkinter: tkinter is one of the more popular python libraries is used for this project, offering us a number of standard GUI building blocks.<br />
 
           messagebox
+          simpledialog
+          filedialog
           
-csvreader: ,<br />
+csv: ,<br />
 
 os: ,<br />
 
@@ -48,15 +51,12 @@ Front-End:<br />
 8. Radio-Button(UI Choice-Based Action Element),<br />
 9. Checkbox(UI Choice-Based Action Element).<br />
 
-Several needed files are imported from tkinter such as (for pop up windows),etc.Libraries such as numpy are also used for certain logical operations.Technicalities aside,the project has been implemented using basic python programming logic comprising of loops,control statements,etc.Special care has been taken for each specific task performed.For instance,while inputing a name,it is verified if the user enters only characters.Our basic registration details include candidate name,guardian's name,their address,gender,contact number and mail id.After succesfully entering the correct details,one has to agree to the T&C,after which an automatic registration number is generated after pressing the registration button.In case of supervisors or registration form co ordinaters to view list of candidates,a "master terminal" has been designed.One can acceess this terminal if they enter the correct key.After which,we will see the Xcel sheet containing list of registered candidates.Lastly,incase of dupliucate entries or other technical difficulties,user defined functions have been created for the same.We can also view our personal registered info using the "view" button.Other useful options are also taken care of.
-What makes our project useful?
-Our project has nothing out of the ordinary,however,we have taken great care to ensure that companies or users using this app will experience optimal features and will not face inconvenient bugs that can hinder work flow.
-Advantages of using this app:
-a.Gain deeper candidate knowledge
-b.Make applicant comparison easier(job application specific)
-c.Flexibility of background checks as well as applications.
-Few drawbacks include laborious redisgning of the app and increasing the chances of wrong judgements if not designed properly.
+# Advantages of using this app:
 
+a. Gain deeper candidate knowledge,<br />
+b. Make applicant comparison easier(job application specific),<br />
+c. Flexibility of background checks as well as applications.<br />
 
+#Future -Updates:
 
 To conclude,this app is a prototype and serves as the base model for several already running registration apps.This app aims to provide the best user experience as well as the simplest registration mechanism and an easier time for the managers.
