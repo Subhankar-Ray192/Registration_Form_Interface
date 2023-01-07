@@ -25,7 +25,7 @@ This app's creation involves the usage of python
 
 tkinter: tkinter is one of the more popular python libraries is used for this project, offering us a number of standard GUI building blocks.<br />
 
-          messagebox<br />
+          messagebox
           
 csvreader: ,<br />
 
