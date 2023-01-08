@@ -2,7 +2,7 @@
 
 This Registration App has a tinge of blue & white reminisces of the open sky and the freedom it offers to our users and to make it a reality we have worked hard to present to you a app that will serve our users well and  will not let them face inconvenient bugs that can hinder work flow because: 
 
-                                                   __We understand the value of your Time__
+                                     __We understand the value of your Time__
 
 # Group Members:
 Tanir Sahoo:          Front-End(UI) Developer ,<br />
