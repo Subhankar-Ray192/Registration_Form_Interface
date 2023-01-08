@@ -308,7 +308,7 @@ class Registration:
    return
 
   def regGen(self):
-   return random.randrange(11,99)
+   return random.randrange(1,10000)
 
 class fileHandle:
  
@@ -331,11 +331,12 @@ class fileHandle:
 
   def sortData(self):
    rows=[]
-   rows=np.array(self.readData())
+   rows=self.readData()
+   rows.sort(key=lambda x:x[10])
    self.createFile()
    f=open(preDefinedFilePath,"a",newline="")
    csvWriter=csv.writer(f)
-   csvWriter.writerows(rows[rows[:,10].argsort()])
+   csvWriter.writerows(rows)
    f.close()
    
   def viewData(self):
