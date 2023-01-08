@@ -15,7 +15,7 @@ preDefinedFilePath="D:\\DataFolder\\Data.csv"
 preDefinedDirPath="D:\\DataFolder"
 
 windObj = Tk()
-colorPalette=["#ffffff","#fc6405","#000000","#fee0cd"]
+colorPalette=["#ffffff","#fc6405","#000000","#fd9350"]
 fontStyles=["Bitter 11","System 15 bold","Courier 18 bold"]
 
 
@@ -248,7 +248,7 @@ class Container:
 
 
  def viewButton(self,eObj):
-  btn=Button(self.fc[2], text="Fetch Info", bg=colorPalette[1], fg=colorPalette[0], font=fontStyles[0], padx=10, pady=2, command=lambda:self.fetch_reg_info(eObj))
+  btn=Button(self.fc[2], text="Fetch Info", bg=colorPalette[1], fg=colorPalette[0], font=fontStyles[0], padx=10, pady=2, command=lambda:self.fetch_reg_info(eObj), activebackground=colorPalette[3])
   btn.grid(row=1, column=1)
   
  def regButton(self,eObj):
@@ -266,33 +266,26 @@ class Container:
     self.data.append(i.get())
   self.data.append(self.currGender)
   self.data.append(self.reg.regGen())
-  #if(self.er.reg(self.data[0])!=5):
-    #tmsg.showinfo("ERROR",err[self.er.reg(self.data[0])])
-  if(self.er.names(self.data[0],self.data[1],self.data[2])!=5):
-      if(self.er.names(self.data[0],self.data[1],self.data[2])==1):
-          tmsg.showinfo("ERROR",err[0])
-      elif(self.er.names(self.data[0],self.data[1],self.data[2])==2):
-          tmsg.showinfo("ERROR",err[1])
-  elif(self.er.names(self.data[3],self.data[4],self.data[5])!=5):
-      if(self.er.names(self.data[3],self.data[4],self.data[5])==1):
-          tmsg.showinfo("ERROR",err[0])
-      elif(self.er.names(self.data[3],self.data[4],self.data[5])==2):
-          tmsg.showinfo("ERROR",err[1])
-  elif(self.er.address(self.data[6]!=5)):
-          tmsg.showinfo("ERROR",err[5])
-  elif(self.er.phone(self.data[7])!=5):
+  if(self.er.names(self.data[0],self.data[1],self.data[2])!=6):
+      tmsg.showinfo("ERROR",err[self.er.names(self.data[3],self.data[4],self.data[5])-1])
+  elif(self.er.names(self.data[3],self.data[4],self.data[5])!=6):
+      tmsg.showinfo("ERROR",err[self.er.names(self.data[3],self.data[4],self.data[5])-1])
+  elif(self.er.address(self.data[6])!=6):
+      tmsg.showinfo("ERROR",err[self.er.address(self.data[6])])
+  elif(self.er.phone(self.data[7])!=6):
       if(self.er.phone(self.data[7])==0):
           tmsg.showinfo("ERROR",err[2])
       else:
-          tmsg.showinfo("ERROR",err[3])
-  elif(self.er.mail(self.data[8])!=5):
+          tmsg.showinfo("ERROR",err[self.er.phone(self.data[7])])
+  elif(self.er.mail(self.data[8])!=6):
     tmsg.showinfo("ERROR",err[4])
   elif(not self.acceptTC):
     tmsg.showinfo("ERROR",err[2])
   else:
+   tmsg.showinfo("Registration Portal","Your Registration-UID:"+" "+str(self.data[10]))
    self.fh.writeData(self.data)
+   self.refresh(eObj)
   self.data.clear()
-  self.refresh(eObj)
 
  def refresh(self,eObj):
   for i in eObj:
@@ -375,13 +368,13 @@ class Errors:
   
   def address(self,a):
    if a==None:
-      return 6
-   else:
       return 5
+   else:
+      return 6
    
   def pin(self,n):
    if len(n)==7 and n.isdigit() is True:
-      return 5
+      return 6
    else:
       return 1
       
@@ -399,13 +392,13 @@ class Errors:
          l2=l.isupper()
          m2=m.isupper()
          if f2 is True and m2 is True and l2 is True:
-           return 5
+           return 6
      else:
            if f1 is True and l1 is True:
                f2=f.isupper()
                l2=l.isupper()
                if f2 is True and l2 is True:
-                   return 5
+                   return 6
            return 2
          
   def phone(self,n):
@@ -414,7 +407,7 @@ class Errors:
    else:
      n1=n.isdigit()
      if n1==True:
-       return 5
+       return 6
      else:
        return 3
             
@@ -422,7 +415,7 @@ class Errors:
    if len(e)==0:
      return 4
    else:
-     return 5
+     return 6
       
   def checker(self,num,f,l,n,e):
    if len(num) == 0 or len(f) == 0 or len(l) == 0 or len(e) == 0 or len(n) == 0:
