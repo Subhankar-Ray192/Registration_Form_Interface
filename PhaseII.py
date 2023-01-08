@@ -15,7 +15,7 @@ preDefinedFilePath="D:\\DataFolder\\Data.csv"
 preDefinedDirPath="D:\\DataFolder"
 
 windObj = Tk()
-colorPalette=["#ffffff","#429ef5","#000000"]
+colorPalette=["#ffffff","#fc6405","#000000","#fee0cd"]
 fontStyles=["Bitter 11","System 15 bold","Courier 18 bold"]
 
 
@@ -24,7 +24,7 @@ header=["First Name:","Middle Name:","Last Name:","First Name:","Middle Name:","
 
 can_details=["Candidates name:" , "Guardian's name: " ,  "Address: " , "Contact number: " , "Email-id: " , "Gender: " , "Registration Status: "]
 
-err=["Name is Compulsory","Invalid Name. Only Characters Allowed","Invalid Phone Numer","Only Digits Allowed in Phone Number","Mail ID Compulsory","Invalid Address"]
+err=["0x00:Name:Compulsory","0x01:Invalid:Name-Characters Allowed(Only)","0x02:Invalid:Phone Numer","0x03:Invalid:Phone Number-Digits(Only)","0x04:Mail-ID:Compulsory","0x05:Invalid:Address"]
 gCategory=["Female","Male","Others"]
 
 regStatus=["Valid","Invalid"]
@@ -42,6 +42,7 @@ class Window:
   windObj.minsize(self.width, self.height)
   windObj.title("TDSSS and Company")
   windObj.configure(bg=colorPalette[0])
+  windObj.iconphoto(False , PhotoImage(file="logo2.png"))
 
 class Container:
  
@@ -251,7 +252,7 @@ class Container:
   btn.grid(row=1, column=1)
   
  def regButton(self,eObj):
-  btn=Button(self.fc[3], text="Register" , command=lambda:self.collectInfo(eObj), bg=colorPalette[1] , fg=colorPalette[0] , padx=232 , pady=10 , font="Bitter 14")
+  btn=Button(self.fc[3], text="Register" , command=lambda:self.collectInfo(eObj), bg=colorPalette[1] , fg=colorPalette[0] , padx=232 , pady=10 , font="Bitter 14" , activebackground=colorPalette[3])
   btn.grid(row=9 , column=1)
  
  def genderSelect(self,value):
