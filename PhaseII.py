@@ -15,7 +15,7 @@ preDefinedFilePath="D:\\DataFolder\\Data.csv"
 preDefinedDirPath="D:\\DataFolder"
 
 windObj = Tk()
-colorPalette=["#ffffff","#fc6405","#000000"]
+colorPalette=["#ffffff","#fc6405","#000000","#fee0cd"]
 fontStyles=["Bitter 11","System 15 bold","Courier 18 bold"]
 
 
@@ -252,7 +252,7 @@ class Container:
   btn.grid(row=1, column=1)
   
  def regButton(self,eObj):
-  btn=Button(self.fc[3], text="Register" , command=lambda:self.collectInfo(eObj), bg=colorPalette[1] , fg=colorPalette[0] , padx=232 , pady=10 , font="Bitter 14")
+  btn=Button(self.fc[3], text="Register" , command=lambda:self.collectInfo(eObj), bg=colorPalette[1] , fg=colorPalette[0] , padx=232 , pady=10 , font="Bitter 14" , activebackground=colorPalette[3])
   btn.grid(row=9 , column=1)
  
  def genderSelect(self,value):
