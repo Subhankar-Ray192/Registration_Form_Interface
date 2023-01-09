@@ -212,7 +212,7 @@ class Container:
    rObj=[]
   
    pSelect=0
-
+ 
    eObj=[]
    
    #Layout-Component:Gen
@@ -271,11 +271,11 @@ class Container:
    eObj[6].grid(row = 6 , column=1 , columnspan=3 , sticky="we" , pady=(20 , 0) , padx=(2 , 2))
    eObj[7].grid(row = 7 , column=1 , sticky=W , pady=(10 , 0) , padx=(2 , 2))
    eObj[8].grid(row = 8 , column=1 , columnspan=3 , sticky="we" , pady=(10 , 0) , padx=(2 , 2))
-
+ 
    rObj[0].grid(row=10 , column=0  , padx=(0 , 0) , pady=(10 , 0))
    rObj[1].grid(row=10 , column=1  , padx=(0 , 0) , pady=(10 , 0))
    rObj[2].grid(row=10 , column=2  , padx=(0 , 0) , pady=(10 , 0))
-
+ 
    terms_and_conditions.grid(row=11 , column=0 , pady=(0 , 0))
    self.regKeyControls(eObj)
    self.regButton(eObj)
