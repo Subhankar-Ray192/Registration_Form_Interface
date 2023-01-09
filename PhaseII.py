@@ -1,7 +1,7 @@
 import csv
 import os
 import numpy as np
-import random
+import uuid
 
 from tkinter import *
 from tkinter import filedialog as fd
@@ -29,6 +29,7 @@ gCategory=["Female","Male","Others"]
 
 regStatus=["Valid","Invalid"]
 
+
 class Window:
 
  def __init__(self):
@@ -44,6 +45,21 @@ class Window:
   windObj.configure(bg=colorPalette[0])
   windObj.iconphoto(False , PhotoImage(file="logo2.png"))
 
+ def resizeWin(self,status):
+  if(status):
+   windObj.maxsize(self.width ,self.height-5)
+   windObj.minsize(self.width,self.height-5)
+  else:
+   windObj.maxsize(self.width ,self.height)
+   windObj.minsize(self.width, self.height)
+  
+  
+ def quit(self):
+  windObj.destroy()
+  
+ def keyControls(self):
+  windObj.bind('<Control-q>',quit)
+
 class Container:
  
  def __init__(self):
@@ -56,12 +72,23 @@ class Container:
   self.acceptTC=0
   self.reg=Registration()
  
- def fetch_reg_info(self,eObj):
+ def hmenuKeyControls(self):
+  windObj.bind('<Control-h>',lambda event: self.hiddenMenu())
+
+ def menuKeyControls(self):
+  windObj.bind('<Control-j>',lambda event: self.menu())
+ 
+ def regKeyControls(self,eObj):
+  windObj.bind('<Return>',lambda event:self.collectInfo(eObj))
+ 
+ def viewKeyControls(self,eObj):
+  windObj.bind('<Return>',lambda event:self.fetchInfo(eObj))
+ 
+ def fetchInfo(self,eObj):
    lObj=[]
-   print("You are trying to fetch the data out of the excel sheet.")
    rows=[]
-   rows=self.fh.readData()
    row=[]
+   rows=self.fh.readData()
    for i in range(7):
     lObj.append(Label(self.fc[3] , text=can_details[i] , bg=colorPalette[0], font=fontStyles[0]))
    
@@ -127,6 +154,15 @@ class Container:
   m_second.add_command(label=self.menuNm[3] , command=lambda:self.fh.viewData())
   yourmenu.add_cascade(label=self.menuNm[4], menu=m_second)
   windObj.config(menu=yourmenu)
+  
+  Window().resizeWin(0)
+  self.hmenuKeyControls()
+ 
+ def hiddenMenu(self):
+  emptyMenu=Menu(windObj)
+  windObj.configure(menu=emptyMenu)
+  Window().resizeWin(1)
+  self.menuKeyControls()
   
  def frameGen(self,bd,wd,ht):
   self.fc.append(Frame(windObj, borderwidth=bd , relief=SUNKEN , width=wd , height=ht))
@@ -221,6 +257,7 @@ class Container:
    rObj[2].grid(row=10 , column=2  , padx=(0 , 0) , pady=(10 , 0))
 
    terms_and_conditions.grid(row=11 , column=0 , pady=(0 , 0))
+   self.regKeyControls(eObj)
    self.regButton(eObj)
  
  def viewLayout(self):
@@ -241,6 +278,7 @@ class Container:
    lObj[1].pack(side="top")
    lObj[2].grid(row=1, column=1)
    eObj.grid(row=1, column=2)
+   self.viewKeyControls(eObj)
    self.viewButton(eObj)
    lObj[3].grid(row=2 , column=1 , pady=(10 , 0))
    
@@ -248,7 +286,7 @@ class Container:
 
 
  def viewButton(self,eObj):
-  btn=Button(self.fc[2], text="Fetch Info", bg=colorPalette[1], fg=colorPalette[0], font=fontStyles[0], padx=10, pady=2, command=lambda:self.fetch_reg_info(eObj), activebackground=colorPalette[3])
+  btn=Button(self.fc[2], text="Fetch Info", bg=colorPalette[1], fg=colorPalette[0], font=fontStyles[0], padx=10, pady=2, command=lambda:self.fetchInfo(eObj), activebackground=colorPalette[3])
   btn.grid(row=1, column=1)
   
  def regButton(self,eObj):
@@ -308,7 +346,7 @@ class Registration:
    return
 
   def regGen(self):
-   return random.randrange(1,10000)
+   return str(uuid.uuid4().node)[:5]
 
 class fileHandle:
  
@@ -322,7 +360,7 @@ class fileHandle:
   
   def writeData(self,data):
    print("Data:",data)
-   if(self.searchData(data[10],10)==-1):
+   if(self.searchData(data[8],8)==-1):
     f=open(preDefinedFilePath,"a",newline="")
     csvWriter=csv.writer(f)
     csvWriter.writerow(data)
@@ -441,6 +479,7 @@ class pathManager:
   
 def main():
  Window().windows()
+ Window().keyControls()
  pathManager().dirHandler()
  Container().regEvent()
  windObj.mainloop()
