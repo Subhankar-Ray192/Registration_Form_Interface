@@ -40,18 +40,6 @@ os: ,<br />
 
 numpy: .<br/>
 
-# Project-Model Analysis:
-
-Front-End:<br />
-1. Window:(Root Object),<br />
-1.1. Frame:(UI-Element Container Object),<br />
-1.1.1. Label:(UI Text-Element),<br />
-1.1.2. Button(UI Action Element),<br/>
-1.1.3. Entry(UI Event-Listening Element),<br />
-1.1.4. Listbox(UI Dropdown Element),<br />
-1.1.5. Radio-Button(UI Choice-Based Action Element),<br />
-1.1.6. Checkbox(UI Choice-Based Action Element).<br />
-
 # Advantages of using this app:
 
 a. Gain deeper candidate knowledge,<br />
