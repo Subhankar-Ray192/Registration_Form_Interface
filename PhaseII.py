@@ -60,10 +60,22 @@ class Window:
  def keyControls(self):
   windObj.bind('<Control-q>',quit)
 
+
+class keyManual:
+ 
+ def __init__(self):
+  return
+ 
+ def keysAvail(self):
+  tmsg.showinfo("Keys","\nQuit: Ctrl+q \n\n Hide-Menu: Ctrl+h \n \n Reveal-Menu: Ctrl+j \n \n View-Portal: Ctrl+z \n \n Register-Portal: Ctrl+x\n \n") 
+  
+ def info(self):
+  tmsg.showinfo("Information","Registration App: V.2.4.10 \n \n Created By: \n Subhankar Ray, \n Tanir Sahoo, \n Dyutiprovo Sarkar, \n Soumyadeep Samanta, \n Sankho Subhro Maitro.")
+ 
 class Container:
  
  def __init__(self):
-  self.menuNm=["Register","View","Menu","Master Terminal","Admin"]
+  self.menuNm=["Register","View","Menu","Master Terminal","Admin","Key Preferences","About","Help"]
   self.fc=[]
   self.data=[]
   self.fh=fileHandle()
@@ -83,6 +95,12 @@ class Container:
  
  def viewKeyControls(self,eObj):
   windObj.bind('<Return>',lambda event:self.fetchInfo(eObj))
+ 
+ def viewWinKey(self):
+  windObj.bind('<Control-z>',lambda event: self.view())
+ 
+ def regWinKey(self):
+  windObj.bind('<Control-x>',lambda event: self.register())
  
  def fetchInfo(self,eObj):
    lObj=[]
@@ -126,7 +144,6 @@ class Container:
     lObj[7].grid(row=3 , column=2 , sticky=W , pady=(10 , 0))
  
  def register(self):
-   #tmsg.showinfo("register-portal","Register-Portal")
    self.frameClear()
    self.regEvent()
    return
@@ -138,10 +155,8 @@ class Container:
     
  
  def view(self):
-   #tmsg.showinfo("view-portal","View-Portal")
    self.frameClear()
    self.viewEvent()
-   return 
 
  def menu(self):
   yourmenu = Menu(windObj)
@@ -153,6 +168,11 @@ class Container:
   m_second = Menu(yourmenu , tearoff=0)
   m_second.add_command(label=self.menuNm[3] , command=lambda:self.fh.viewData())
   yourmenu.add_cascade(label=self.menuNm[4], menu=m_second)
+
+  m_third = Menu(yourmenu , tearoff=0)
+  m_third.add_command(label = self.menuNm[5] , command =lambda:keyManual().keysAvail())
+  m_third.add_command(label = self.menuNm[6] , command =lambda:keyManual().info())
+  yourmenu.add_cascade(label = self.menuNm[7], menu=m_third)
   windObj.config(menu=yourmenu)
   
   Window().resizeWin(0)
@@ -333,12 +353,14 @@ class Container:
   
  def regEvent(self):
   self.menu()
-  self.frameGen(0,500,150) 
+  self.frameGen(0,500,150)
+  self.viewWinKey() 
   self.regLayout()
 
  def viewEvent(self):
    self.menu()
    self.frameGen(0,500,150)
+   self.regWinKey()
    self.viewLayout()
 
 
