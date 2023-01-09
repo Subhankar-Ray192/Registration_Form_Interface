@@ -22,9 +22,9 @@ fontStyles=["Bitter 11","System 15 bold","Courier 18 bold"]
 title=["Candidate's details:","Guardian's details:"]
 header=["First Name:","Middle Name:","Last Name:","First Name:","Middle Name:","Last Name:" ,"Address:", "Contact Number:","Email:","Gender:","Registration Number"]
 
-can_details=["Candidates name:" , "Guardian's name: " ,  "Address: " , "Contact number: " , "Email-id: " , "Gender: " , "Registration Status: "]
+can_details=["Candidates Name:" , "Guardian's Name: " ,  "Address: " , "Contact number: " , "Email-id: " , "Gender: " , "Registration Status: "]
 
-err=["0x00:Name:Compulsory","0x01:Invalid:Name-Characters Allowed(Only)","0x02:Invalid:Phone Numer","0x03:Invalid:Phone Number-Digits(Only)","0x04:Mail-ID:Compulsory","0x05:Invalid:Address"]
+err=["0x00:Empty Field Error->","0x01:Invalid:Name-Characters Allowed(Only)","0x02:Invalid:Phone-Digits[10] Allowed(Only)","0x03:Invalid:Phone Number-Digits(Only)","0x04:Mail-ID:Compulsory","0x05:Policy-Acceptance:Compulsory"]
 gCategory=["Female","Male","Others"]
 
 regStatus=["Valid","Invalid"]
@@ -305,20 +305,22 @@ class Container:
   self.data.append(self.currGender)
   self.data.append(self.reg.regGen())
   if(self.er.names(self.data[0],self.data[1],self.data[2])!=6):
-      tmsg.showinfo("ERROR",err[self.er.names(self.data[3],self.data[4],self.data[5])-1])
+      tmsg.showinfo("ERROR",err[self.er.names(self.data[3],self.data[4],self.data[5])-1]+can_details[0])
   elif(self.er.names(self.data[3],self.data[4],self.data[5])!=6):
-      tmsg.showinfo("ERROR",err[self.er.names(self.data[3],self.data[4],self.data[5])-1])
+      tmsg.showinfo("ERROR",err[self.er.names(self.data[3],self.data[4],self.data[5])-1]+can_details[1])
   elif(self.er.address(self.data[6])!=6):
-      tmsg.showinfo("ERROR",err[self.er.address(self.data[6])])
+      tmsg.showinfo("ERROR",err[self.er.address(self.data[6])]+can_details[2])
   elif(self.er.phone(self.data[7])!=6):
       if(self.er.phone(self.data[7])==0):
           tmsg.showinfo("ERROR",err[2])
       else:
           tmsg.showinfo("ERROR",err[self.er.phone(self.data[7])])
   elif(self.er.mail(self.data[8])!=6):
-    tmsg.showinfo("ERROR",err[4])
+    tmsg.showinfo("ERROR",err[self.er.mail(self.data[8])]+can_details[4])
+  elif((self.currGender!=gCategory[0])and(self.currGender!=gCategory[1])and(self.currGender!=gCategory[2])):
+    tmsg.showinfo("ERROR",err[0]+can_details[5])
   elif(not self.acceptTC):
-    tmsg.showinfo("ERROR",err[2])
+    tmsg.showinfo("ERROR",err[5])
   else:
    tmsg.showinfo("Registration Portal","Your Registration-UID:"+" "+str(self.data[10]))
    self.fh.writeData(self.data)
@@ -406,16 +408,10 @@ class fileHandle:
 class Errors:
   
   def address(self,a):
-   if a==None:
-      return 5
+   if len(a)==0:
+      return 0
    else:
       return 6
-   
-  def pin(self,n):
-   if len(n)==7 and n.isdigit() is True:
-      return 6
-   else:
-      return 1
       
   def names(self,f,m,l):
    if len(f)==0 or len(l)==0:
@@ -452,7 +448,7 @@ class Errors:
             
   def mail(self,e):
    if len(e)==0:
-     return 4
+     return 0
    else:
      return 6
       
