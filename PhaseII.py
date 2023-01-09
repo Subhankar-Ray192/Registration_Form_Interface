@@ -24,7 +24,7 @@ header=["First Name:","Middle Name:","Last Name:","First Name:","Middle Name:","
 
 can_details=["Candidates Name:" , "Guardian's Name: " ,  "Address: " , "Contact number: " , "Email-id: " , "Gender: " , "Registration Status: "]
 
-err=["0x00:Empty Field Error->","0x01:Invalid:Name-Characters Allowed(Only)","0x02:Invalid:Phone-Digits[10] Allowed(Only)","0x03:Invalid:Phone Number-Digits(Only)","0x04:Mail-ID:Compulsory","0x05:Policy-Acceptance:Compulsory"]
+err=["0x00:Empty Field Error->","0x01:Invalid:Characters Allowed(Only)-->","0x02:Invalid:Phone-Digits[10] Allowed(Only)","0x03:Invalid:Phone Number-Digits(Only)","0x04:Mail-ID:Compulsory","0x05:Policy-Acceptance:Compulsory"]
 gCategory=["Female","Male","Others"]
 
 regStatus=["Valid","Invalid"]
@@ -324,18 +324,18 @@ class Container:
     self.data.append(i.get())
   self.data.append(self.currGender)
   self.data.append(self.reg.regGen())
-  if(self.er.names(self.data[0],self.data[1],self.data[2])!=6):
-      tmsg.showinfo("ERROR",err[self.er.names(self.data[3],self.data[4],self.data[5])-1]+can_details[0])
-  elif(self.er.names(self.data[3],self.data[4],self.data[5])!=6):
+  if(self.er.names(self.data[0],self.data[1],self.data[2])!=7):
+      tmsg.showinfo("ERROR",err[self.er.names(self.data[0],self.data[1],self.data[2])-1]+can_details[0])
+  elif(self.er.names(self.data[3],self.data[4],self.data[5])!=7):
       tmsg.showinfo("ERROR",err[self.er.names(self.data[3],self.data[4],self.data[5])-1]+can_details[1])
-  elif(self.er.address(self.data[6])!=6):
+  elif(self.er.address(self.data[6])!=7):
       tmsg.showinfo("ERROR",err[self.er.address(self.data[6])]+can_details[2])
-  elif(self.er.phone(self.data[7])!=6):
+  elif(self.er.phone(self.data[7])!=7):
       if(self.er.phone(self.data[7])==0):
           tmsg.showinfo("ERROR",err[2])
       else:
           tmsg.showinfo("ERROR",err[self.er.phone(self.data[7])])
-  elif(self.er.mail(self.data[8])!=6):
+  elif(self.er.mail(self.data[8])!=7):
     tmsg.showinfo("ERROR",err[self.er.mail(self.data[8])]+can_details[4])
   elif((self.currGender!=gCategory[0])and(self.currGender!=gCategory[1])and(self.currGender!=gCategory[2])):
     tmsg.showinfo("ERROR",err[0]+can_details[5])
@@ -383,7 +383,6 @@ class fileHandle:
    csvWriter.writerow(header)
   
   def writeData(self,data):
-   print("Data:",data)
    if(self.searchData(data[8],8)==-1):
     f=open(preDefinedFilePath,"a",newline="")
     csvWriter=csv.writer(f)
@@ -433,7 +432,7 @@ class Errors:
    if len(a)==0:
       return 0
    else:
-      return 6
+      return 7
       
   def names(self,f,m,l):
    if len(f)==0 or len(l)==0:
@@ -449,14 +448,14 @@ class Errors:
          l2=l.isupper()
          m2=m.isupper()
          if f2 is True and m2 is True and l2 is True:
-           return 6
+           return 7
      else:
            if f1 is True and l1 is True:
                f2=f.isupper()
                l2=l.isupper()
                if f2 is True and l2 is True:
-                   return 6
-           return 2
+                   return 7
+     return 2
          
   def phone(self,n):
    if len(n)<10 or len(n)>10:
@@ -464,7 +463,7 @@ class Errors:
    else:
      n1=n.isdigit()
      if n1==True:
-       return 6
+       return 7
      else:
        return 3
             
@@ -472,7 +471,7 @@ class Errors:
    if len(e)==0:
      return 0
    else:
-     return 6
+     return 7
       
   def checker(self,num,f,l,n,e):
    if len(num) == 0 or len(f) == 0 or len(l) == 0 or len(e) == 0 or len(n) == 0:
