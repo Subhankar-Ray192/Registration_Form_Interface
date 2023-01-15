@@ -16,7 +16,7 @@ preDefinedFilePath = "D:\\DataFolder\\Data.csv"
 preDefinedDirPath = "D:\\DataFolder"
 
 windObj = Tk()
-colorPalette = ["#ffffff", "#fc6405", "#000000", "#fd9350"]
+colorPalette = ["#ffffff", "#fc6405", "#000000", "#fd9350","#808080"]
 fontStyles = ["Bitter 11", "System 15 bold", "Courier 18 bold"]
 
 title = ["Candidate's details:", "Guardian's details:"]
@@ -92,7 +92,6 @@ class Container:
         self.country=""
         self.acceptTC = 0
         self.reg = Registration()
-        self.tempFrame=[]
 
     def hmenuKeyControls(self):
         windObj.bind('<Control-h>', lambda event: self.hiddenMenu())
@@ -113,9 +112,8 @@ class Container:
         windObj.bind('<Control-x>', lambda event: self.register())
 
     def fetchInfo(self, eObj):
-        
-        self.tempFrame.append(Frame(self.fc[3], borderwidth=2,relief=SUNKEN))
-        self.tempFrame[0].configure(bg=colorPalette[0])
+        tempFrame=[]
+        tempFrame.append(Frame(self.fc[3], borderwidth=2,relief=SUNKEN,bg=colorPalette[0]))
         
         lObj = []
         lObjVD=[]
@@ -128,24 +126,24 @@ class Container:
             row = rows[self.fh.searchData(eObj.get(), 12)]
             
             for i in range(6):
-             lObj.append(Label(self.tempFrame[0], text=can_details[i], bg=colorPalette[0], font=fontStyles[0]))
+             lObj.append(Label(tempFrame[0], text=can_details[i], bg=colorPalette[0], font=fontStyles[0]))
             
             # Label:Info
-            lObjVD.append(Label(self.tempFrame[0], text=str(row[0] + " " + row[1] + " " + row[2]), bg=colorPalette[0],
+            lObjVD.append(Label(tempFrame[0], text=str(row[0] + " " + row[1] + " " + row[2]), bg=colorPalette[0],
                               font=fontStyles[0]))
-            lObjVD.append(Label(self.tempFrame[0], text=str(row[3] + " " + row[4] + " " + row[5]), bg=colorPalette[0],
+            lObjVD.append(Label(tempFrame[0], text=str(row[3] + " " + row[4] + " " + row[5]), bg=colorPalette[0],
                               font=fontStyles[0]))
-            lObjVD.append(Label(self.tempFrame[0], text=row[6], bg=colorPalette[0], font=fontStyles[0]))
-            lObjVD.append(Label(self.tempFrame[0], text=row[7], bg=colorPalette[0], font=fontStyles[0]))
-            lObjVD.append(Label(self.tempFrame[0], text=row[8]+","+row[9], bg=colorPalette[0], font=fontStyles[0]))
-            lObjVD.append(Label(self.tempFrame[0], text=row[11], bg=colorPalette[0], font=fontStyles[0]))
+            lObjVD.append(Label(tempFrame[0], text=row[6], bg=colorPalette[0], font=fontStyles[0]))
+            lObjVD.append(Label(tempFrame[0], text=row[7], bg=colorPalette[0], font=fontStyles[0]))
+            lObjVD.append(Label(tempFrame[0], text=row[8]+","+row[9], bg=colorPalette[0], font=fontStyles[0]))
+            lObjVD.append(Label(tempFrame[0], text=row[11], bg=colorPalette[0], font=fontStyles[0]))
             #lObjVD.append(Label(self.fc[3], text=regStatus[0]+"  ", bg=colorPalette[0], font=fontStyles[0]))
             
             lObj.append(Label(self.fc[3], text=can_details[6]+" "+regStatus[0]+"  ", bg=colorPalette[0], font=fontStyles[0]))
             
             # Label:Position
             lObj[6].grid(row=3, column=1, sticky=W, pady=(10, 0))
-            self.tempFrame[0].grid(row=4,column=1, sticky=W, pady=(10,0),rowspan=6)
+            tempFrame[0].grid(row=4,column=1, sticky=W, pady=(10,0),rowspan=6)
             lObj[0].grid(row=0, column=1, sticky=W, pady=(10, 0))
             lObjVD[0].grid(row=0, column=2, sticky=W, pady=(10, 0))
             lObj[1].grid(row=1, column=1, sticky=W, pady=(10, 0))
@@ -161,12 +159,12 @@ class Container:
         else:
              
             for i in range(6):
-              lObj.append(Label(self.tempFrame[0], text=can_details[i], bg=colorPalette[0], font=fontStyles[0]))
-              lObjVD.append(Label(self.tempFrame[0], text="                      ", bg=colorPalette[0], font=fontStyles[0]))
+              lObj.append(Label(tempFrame[0], text=can_details[i], bg=colorPalette[0], font=fontStyles[0]))
+              lObjVD.append(Label(tempFrame[0], text="                      ", bg=colorPalette[0], font=fontStyles[0]))
             
             
             lObj.append(Label(self.fc[3], text=can_details[6]+" "+regStatus[1]+"  ", bg=colorPalette[0], font=fontStyles[0]))
-            self.tempFrame[0].grid(row=4,column=1, sticky=W, pady=(10,0),rowspan=6)
+            tempFrame[0].grid(row=4,column=1, sticky=W, pady=(10,0),rowspan=6)
             lObj[0].grid(row=0, column=1, sticky=W, pady=(10, 0))
             lObjVD[0].grid(row=0, column=2, sticky=W, pady=(10, 0))
             lObj[1].grid(row=1, column=1, sticky=W, pady=(10, 0))
@@ -179,8 +177,8 @@ class Container:
             lObjVD[4].grid(row=4, column=2, sticky=W, pady=(10, 0))
             lObj[5].grid(row=5, column=1, sticky=W, pady=(10, 0))
             lObjVD[5].grid(row=5, column=2, sticky=W, pady=(10, 0))
-            
             lObj[6].grid(row=3, column=1, sticky=W, pady=(10, 0))
+            
             
             
             
@@ -198,6 +196,7 @@ class Container:
     def view(self):
         self.frameClear()
         self.viewEvent()
+        return
 
     def menu(self):
         yourmenu = Menu(windObj)
@@ -319,7 +318,27 @@ class Container:
         lObj[14].grid(row=10, column=0, sticky="W", pady=(10, 0), padx=(0, 0))
         lObj[15].grid(row=11, column=0, sticky="W", pady=(10, 0), padx=(0, 0))
 
-
+        #Default-Examples
+        
+        eObj[0].config(fg=colorPalette[4])
+        eObj[0].insert(0,"TANIR")
+        eObj[1].config(fg=colorPalette[4])
+        eObj[1].insert(0,"KAR")
+        eObj[2].config(fg=colorPalette[4])
+        eObj[2].insert(0,"SAHOO")
+        eObj[3].config(fg=colorPalette[4])
+        eObj[3].insert(0,"SUBHANKAR")
+        eObj[4].config(fg=colorPalette[4])
+        eObj[4].insert(0,"KAR")
+        eObj[5].config(fg=colorPalette[4])
+        eObj[5].insert(0,"RAY")
+        eObj[6].config(fg=colorPalette[4])
+        eObj[6].insert(0,"1234567890")
+        eObj[7].config(fg=colorPalette[4])
+        eObj[7].insert(0,"example@gmail.com")
+        eObj[8].config(fg=colorPalette[4])
+        eObj[8].insert(0,"10,Lee Road,Belur")
+        
         eObj[0].grid(row=2, column=0, sticky=W, pady=(7, 0), padx=(2, 2))
         eObj[1].grid(row=2, column=1, sticky=W, pady=(7, 0), padx=(2, 2))
         eObj[2].grid(row=2, column=2, sticky=W, pady=(7, 0), padx=(2, 2))
@@ -330,7 +349,18 @@ class Container:
         eObj[7].grid(row=7, column=1, columnspan=3, sticky="WE", pady=(6, 0), padx=(2, 2))
         
         eObj[8].grid(row=8, column=1, columnspan=3, sticky="WE", pady=(10, 0), padx=(2, 2))
-
+        
+        #Binding-Focus
+        eObj[0].bind("<FocusIn>",lambda event:self.tempText(eObj[0]))
+        eObj[1].bind("<FocusIn>",lambda event:self.tempText(eObj[1]))
+        eObj[2].bind("<FocusIn>",lambda event:self.tempText(eObj[2]))
+        eObj[3].bind("<FocusIn>",lambda event:self.tempText(eObj[3]))
+        eObj[4].bind("<FocusIn>",lambda event:self.tempText(eObj[4]))
+        eObj[5].bind("<FocusIn>",lambda event:self.tempText(eObj[5]))
+        eObj[6].bind("<FocusIn>",lambda event:self.tempText(eObj[6]))
+        eObj[7].bind("<FocusIn>",lambda event:self.tempText(eObj[7]))
+        eObj[8].bind("<FocusIn>",lambda event:self.tempText(eObj[8]))
+        
         #Country Code work:
         eObj[9].grid(row=9, column=1, sticky=E, pady=(10, 0), padx=(2, 2))
 
@@ -345,8 +375,14 @@ class Container:
         rObj[2].grid(row=12, column=2, padx=(0, 0), pady=(10, 0))
 
         terms_and_conditions.grid(row=13, column=0, pady=(0, 0))
+        
         self.regKeyControls(eObj)
         self.regButton(eObj)
+    
+    
+    def tempText(self,eObj):
+        eObj.delete(0,"end")
+        eObj.config(fg=colorPalette[2])
     
     def pickCountry(self,n):
         self.country=n.get()
