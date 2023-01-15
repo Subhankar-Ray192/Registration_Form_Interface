@@ -92,6 +92,7 @@ class Container:
         self.country=""
         self.acceptTC = 0
         self.reg = Registration()
+        self.tempFrame=[]
 
     def hmenuKeyControls(self):
         windObj.bind('<Control-h>', lambda event: self.hiddenMenu())
@@ -112,60 +113,76 @@ class Container:
         windObj.bind('<Control-x>', lambda event: self.register())
 
     def fetchInfo(self, eObj):
+        
+        self.tempFrame.append(Frame(self.fc[3], borderwidth=2,relief=SUNKEN))
+        self.tempFrame[0].configure(bg=colorPalette[0])
+        
         lObj = []
         lObjVD=[]
-        lObjID=[]
         rows = []
         row = []
         rows = self.fh.readData()
-        for i in range(7):
-            lObj.append(Label(self.fc[3], text=can_details[i], bg=colorPalette[0], font=fontStyles[0]))
-
+        
+        
         if (not self.fh.searchData(eObj.get(), 12) == -1):
             row = rows[self.fh.searchData(eObj.get(), 12)]
             
-            
+            for i in range(6):
+             lObj.append(Label(self.tempFrame[0], text=can_details[i], bg=colorPalette[0], font=fontStyles[0]))
             
             # Label:Info
-            lObjVD.append(Label(self.fc[3], text=str(row[0] + " " + row[1] + " " + row[2]), bg=colorPalette[0],
+            lObjVD.append(Label(self.tempFrame[0], text=str(row[0] + " " + row[1] + " " + row[2]), bg=colorPalette[0],
                               font=fontStyles[0]))
-            lObjVD.append(Label(self.fc[3], text=str(row[3] + " " + row[4] + " " + row[5]), bg=colorPalette[0],
+            lObjVD.append(Label(self.tempFrame[0], text=str(row[3] + " " + row[4] + " " + row[5]), bg=colorPalette[0],
                               font=fontStyles[0]))
-            lObjVD.append(Label(self.fc[3], text=row[6], bg=colorPalette[0], font=fontStyles[0]))
-            lObjVD.append(Label(self.fc[3], text=row[7], bg=colorPalette[0], font=fontStyles[0]))
-            lObjVD.append(Label(self.fc[3], text=row[8]+","+row[9], bg=colorPalette[0], font=fontStyles[0]))
-            lObjVD.append(Label(self.fc[3], text=row[11], bg=colorPalette[0], font=fontStyles[0]))
-            lObjVD.append(Label(self.fc[3], text=regStatus[0]+"  ", bg=colorPalette[0], font=fontStyles[0]))
-
+            lObjVD.append(Label(self.tempFrame[0], text=row[6], bg=colorPalette[0], font=fontStyles[0]))
+            lObjVD.append(Label(self.tempFrame[0], text=row[7], bg=colorPalette[0], font=fontStyles[0]))
+            lObjVD.append(Label(self.tempFrame[0], text=row[8]+","+row[9], bg=colorPalette[0], font=fontStyles[0]))
+            lObjVD.append(Label(self.tempFrame[0], text=row[11], bg=colorPalette[0], font=fontStyles[0]))
+            #lObjVD.append(Label(self.fc[3], text=regStatus[0]+"  ", bg=colorPalette[0], font=fontStyles[0]))
+            
+            lObj.append(Label(self.fc[3], text=can_details[6]+" "+regStatus[0]+"  ", bg=colorPalette[0], font=fontStyles[0]))
+            
             # Label:Position
             lObj[6].grid(row=3, column=1, sticky=W, pady=(10, 0))
-            lObjVD[6].grid(row=3, column=2, sticky=W, pady=(10, 0))
-            lObj[0].grid(row=4, column=1, sticky=W, pady=(10, 0))
-            lObjVD[0].grid(row=4, column=2, sticky=W, pady=(10, 0))
-            lObj[1].grid(row=5, column=1, sticky=W, pady=(10, 0))
-            lObjVD[1].grid(row=5, column=2, sticky=W, pady=(10, 0))
-            lObj[2].grid(row=6, column=1, sticky=W, pady=(10, 0))
-            lObjVD[2].grid(row=6, column=2, sticky=W, pady=(10, 0))
-            lObj[3].grid(row=7, column=1, sticky=W, pady=(10, 0))
-            lObjVD[3].grid(row=7, column=2, sticky=W, pady=(10, 0))
-            lObj[4].grid(row=8, column=1, sticky=W, pady=(10, 0))
-            lObjVD[4].grid(row=8, column=2, sticky=W, pady=(10, 0))
-            lObj[5].grid(row=9, column=1, sticky=W, pady=(10, 0))
-            lObjVD[5].grid(row=9, column=2, sticky=W, pady=(10, 0))
+            self.tempFrame[0].grid(row=4,column=1, sticky=W, pady=(10,0),rowspan=6)
+            lObj[0].grid(row=0, column=1, sticky=W, pady=(10, 0))
+            lObjVD[0].grid(row=0, column=2, sticky=W, pady=(10, 0))
+            lObj[1].grid(row=1, column=1, sticky=W, pady=(10, 0))
+            lObjVD[1].grid(row=1, column=2, sticky=W, pady=(10, 0))
+            lObj[2].grid(row=2, column=1, sticky=W, pady=(10, 0))
+            lObjVD[2].grid(row=2, column=2, sticky=W, pady=(10, 0))
+            lObj[3].grid(row=3, column=1, sticky=W, pady=(10, 0))
+            lObjVD[3].grid(row=3, column=2, sticky=W, pady=(10, 0))
+            lObj[4].grid(row=4, column=1, sticky=W, pady=(10, 0))
+            lObjVD[4].grid(row=4, column=2, sticky=W, pady=(10, 0))
+            lObj[5].grid(row=5, column=1, sticky=W, pady=(10, 0))
+            lObjVD[5].grid(row=5, column=2, sticky=W, pady=(10, 0))
         else:
-            ID=Label(self.fc[3], text=regStatus[1], bg=colorPalette[0], font=fontStyles[0])
-            
+             
             for i in range(6):
-             lObjID.append(Label(self.fc[3], text="                              ", bg=colorPalette[0], font=fontStyles[0]))
+              lObj.append(Label(self.tempFrame[0], text=can_details[i], bg=colorPalette[0], font=fontStyles[0]))
+              lObjVD.append(Label(self.tempFrame[0], text="                      ", bg=colorPalette[0], font=fontStyles[0]))
+            
+            
+            lObj.append(Label(self.fc[3], text=can_details[6]+" "+regStatus[1]+"  ", bg=colorPalette[0], font=fontStyles[0]))
+            self.tempFrame[0].grid(row=4,column=1, sticky=W, pady=(10,0),rowspan=6)
+            lObj[0].grid(row=0, column=1, sticky=W, pady=(10, 0))
+            lObjVD[0].grid(row=0, column=2, sticky=W, pady=(10, 0))
+            lObj[1].grid(row=1, column=1, sticky=W, pady=(10, 0))
+            lObjVD[1].grid(row=1, column=2, sticky=W, pady=(10, 0))
+            lObj[2].grid(row=2, column=1, sticky=W, pady=(10, 0))
+            lObjVD[2].grid(row=2, column=2, sticky=W, pady=(10, 0))
+            lObj[3].grid(row=3, column=1, sticky=W, pady=(10, 0))
+            lObjVD[3].grid(row=3, column=2, sticky=W, pady=(10, 0))
+            lObj[4].grid(row=4, column=1, sticky=W, pady=(10, 0))
+            lObjVD[4].grid(row=4, column=2, sticky=W, pady=(10, 0))
+            lObj[5].grid(row=5, column=1, sticky=W, pady=(10, 0))
+            lObjVD[5].grid(row=5, column=2, sticky=W, pady=(10, 0))
             
             lObj[6].grid(row=3, column=1, sticky=W, pady=(10, 0))
-            ID.grid(row=3, column=2, sticky=W, pady=(10, 0))
-            lObjID[0].grid(row=4, column=1, sticky=W, pady=(10, 0))
-            lObjID[1].grid(row=5, column=1, sticky=W, pady=(10, 0))
-            lObjID[2].grid(row=6, column=1, sticky=W, pady=(10, 0))
-            lObjID[3].grid(row=7, column=1, sticky=W, pady=(10, 0))
-            lObjID[4].grid(row=8, column=1, sticky=W, pady=(10, 0))
-            lObjID[5].grid(row=9, column=1, sticky=W, pady=(10, 0))
+            
+            
             
             
     def register(self):
@@ -364,6 +381,7 @@ class Container:
         btn = Button(self.fc[2], text="Fetch Info", bg=colorPalette[1], fg=colorPalette[0], font=fontStyles[0], padx=10,
                      pady=2, command=lambda: self.fetchInfo(eObj), activebackground=colorPalette[3])
         btn.grid(row=1, column=1)
+        
 
     def regButton(self, eObj):
         btn = Button(self.fc[3], text="Register", command=lambda: self.collectInfo(eObj), bg=colorPalette[1],
