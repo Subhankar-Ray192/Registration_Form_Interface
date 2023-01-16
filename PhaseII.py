@@ -77,7 +77,8 @@ class keyManual:
 
     def info(self):
         tmsg.showinfo("Information",
-                      "Registration App: V.2.4.13 \n \n Created By: \n Subhankar Ray, \n Tanir Sahoo, \n Dyutiprovo Sarkar, \n Soumyadeep Samanta, \n Sankho Subhro Maitro.")
+        Registration App: V.2.4.13 \n \n Created By: \n Subhankar Ray, \n Tanir Sahoo, \n Dyutiprovo Sarkar, \n Soumyadeep Samanta, \n Sankho Subhro Maitro.")
+
 
 
 class Container:
@@ -116,72 +117,60 @@ class Container:
         tempFrame.append(Frame(self.fc[3], borderwidth=2,relief=SUNKEN,bg=colorPalette[0]))
         
         lObj = []
-        lObjVD=[]
+        viewObj=[]
         rows = []
         row = []
         rows = self.fh.readData()
         
+        for i in range(6):
+             lObj.append(Label(tempFrame[0], text=can_details[i], bg=colorPalette[0], font=fontStyles[0]))
+        
+        for i in range(6):
+                viewObj.append(Entry(tempFrame[0], font=fontStyles[0], highlightbackground=colorPalette[0], highlightthickness=0,highlightcolor=colorPalette[0],relief=FLAT))
         
         if (not self.fh.searchData(eObj.get(), 12) == -1):
             row = rows[self.fh.searchData(eObj.get(), 12)]
             
-            for i in range(6):
-             lObj.append(Label(tempFrame[0], text=can_details[i], bg=colorPalette[0], font=fontStyles[0]))
+            lObj.append(Label(self.fc[3], text=can_details[6]+" "+regStatus[0]+"  ", bg=colorPalette[0], font=fontStyles[0]))
             
             # Label:Info
-            lObjVD.append(Label(tempFrame[0], text=str(row[0] + " " + row[1] + " " + row[2]), bg=colorPalette[0],
-                              font=fontStyles[0]))
-            lObjVD.append(Label(tempFrame[0], text=str(row[3] + " " + row[4] + " " + row[5]), bg=colorPalette[0],
-                              font=fontStyles[0]))
-            lObjVD.append(Label(tempFrame[0], text=row[6], bg=colorPalette[0], font=fontStyles[0]))
-            lObjVD.append(Label(tempFrame[0], text=row[7], bg=colorPalette[0], font=fontStyles[0]))
-            lObjVD.append(Label(tempFrame[0], text=row[8]+","+row[9], bg=colorPalette[0], font=fontStyles[0]))
-            lObjVD.append(Label(tempFrame[0], text=row[11], bg=colorPalette[0], font=fontStyles[0]))
-            #lObjVD.append(Label(self.fc[3], text=regStatus[0]+"  ", bg=colorPalette[0], font=fontStyles[0]))
             
-            lObj.append(Label(self.fc[3], text=can_details[6]+" "+regStatus[0]+"  ", bg=colorPalette[0], font=fontStyles[0]))
+            self.insertViewInfo(1,row,viewObj)
             
             # Label:Position
             lObj[6].grid(row=3, column=1, sticky=W, pady=(10, 0))
-            tempFrame[0].grid(row=4,column=1, sticky=W, pady=(10,0),rowspan=6)
-            lObj[0].grid(row=0, column=1, sticky=W, pady=(10, 0))
-            lObjVD[0].grid(row=0, column=2, sticky=W, pady=(10, 0))
-            lObj[1].grid(row=1, column=1, sticky=W, pady=(10, 0))
-            lObjVD[1].grid(row=1, column=2, sticky=W, pady=(10, 0))
-            lObj[2].grid(row=2, column=1, sticky=W, pady=(10, 0))
-            lObjVD[2].grid(row=2, column=2, sticky=W, pady=(10, 0))
-            lObj[3].grid(row=3, column=1, sticky=W, pady=(10, 0))
-            lObjVD[3].grid(row=3, column=2, sticky=W, pady=(10, 0))
-            lObj[4].grid(row=4, column=1, sticky=W, pady=(10, 0))
-            lObjVD[4].grid(row=4, column=2, sticky=W, pady=(10, 0))
-            lObj[5].grid(row=5, column=1, sticky=W, pady=(10, 0))
-            lObjVD[5].grid(row=5, column=2, sticky=W, pady=(10, 0))
-        else:
-             
-            for i in range(6):
-              lObj.append(Label(tempFrame[0], text=can_details[i], bg=colorPalette[0], font=fontStyles[0]))
-              lObjVD.append(Label(tempFrame[0], text="                      ", bg=colorPalette[0], font=fontStyles[0]))
             
+            tempFrame[0].grid(row=4,column=1, sticky=W, pady=(10,0),rowspan=6)
+        else:
             
             lObj.append(Label(self.fc[3], text=can_details[6]+" "+regStatus[1]+"  ", bg=colorPalette[0], font=fontStyles[0]))
+            
+            self.insertViewInfo(0,row,viewObj)
+            
             tempFrame[0].grid(row=4,column=1, sticky=W, pady=(10,0),rowspan=6)
-            lObj[0].grid(row=0, column=1, sticky=W, pady=(10, 0))
-            lObjVD[0].grid(row=0, column=2, sticky=W, pady=(10, 0))
-            lObj[1].grid(row=1, column=1, sticky=W, pady=(10, 0))
-            lObjVD[1].grid(row=1, column=2, sticky=W, pady=(10, 0))
-            lObj[2].grid(row=2, column=1, sticky=W, pady=(10, 0))
-            lObjVD[2].grid(row=2, column=2, sticky=W, pady=(10, 0))
-            lObj[3].grid(row=3, column=1, sticky=W, pady=(10, 0))
-            lObjVD[3].grid(row=3, column=2, sticky=W, pady=(10, 0))
-            lObj[4].grid(row=4, column=1, sticky=W, pady=(10, 0))
-            lObjVD[4].grid(row=4, column=2, sticky=W, pady=(10, 0))
-            lObj[5].grid(row=5, column=1, sticky=W, pady=(10, 0))
-            lObjVD[5].grid(row=5, column=2, sticky=W, pady=(10, 0))
+            
             lObj[6].grid(row=3, column=1, sticky=W, pady=(10, 0))
             
+        for i in range(6):
+              lObj[i].grid(row=i, column=1, sticky=W, pady=(10, 0))
+              viewObj[i].grid(row=i, column=2, sticky=W, pady=(10, 0))            
             
             
-            
+    def insertViewInfo(self,x,row,viewObj):
+     if(x):
+         viewObj[0].insert(0,row[0] +" " + row[1] + " "+ row[2])
+         viewObj[1].insert(0,row[3] + " " + row[4] + " " + row[5])
+         viewObj[2].insert(0,row[6])
+         viewObj[3].insert(0,row[7])
+         viewObj[4].insert(0,row[8]+", Kolkata-"+row[9])
+         viewObj[5].insert(0,row[11])
+         for i in viewObj:
+          i.bind("<Key>", lambda a: "break")
+     else:
+         for i in viewObj:
+           i.insert(0," ")
+           i.bind("<Key>", lambda a: "break")
+                 
             
     def register(self):
         self.frameClear()
