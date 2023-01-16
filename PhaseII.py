@@ -76,8 +76,7 @@ class keyManual:
                       "\nQuit: Ctrl+q \n\n Hide-Menu: Ctrl+h \n \n Reveal-Menu: Ctrl+j \n \n View-Portal: Ctrl+z \n \n Register-Portal: Ctrl+x\n \n")
 
     def info(self):
-        tmsg.showinfo("Information",
-        Registration App: V.2.4.13 \n \n Created By: \n Subhankar Ray, \n Tanir Sahoo, \n Dyutiprovo Sarkar, \n Soumyadeep Samanta, \n Sankho Subhro Maitro.")
+        tmsg.showinfo("Information","Registration App: V.2.4.13 \n \n Created By: \n Subhankar Ray, \n Tanir Sahoo, \n Dyutiprovo Sarkar, \n Soumyadeep Samanta.")
 
 
 
