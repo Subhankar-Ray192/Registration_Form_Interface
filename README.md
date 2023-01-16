@@ -1,6 +1,6 @@
 # What makes this Registration App useful?
 
-This Registration App has a tinge of blue & white reminisces of the open sky and the freedom it offers to our users and to make it a reality we have worked hard to present to you a app that will serve our users well and  will not let them face inconvenient bugs that can hinder work flow because: 
+This Registration App has a tinge of orange & white reminisces of the fire and is representative of our passion to offer to our users a app that will serve our users well and  will let them experience a smooth hassle-free UI-experience that will help them have a uninterrupted workflow because: 
 
                                      __We understand the value of your Time__
 
