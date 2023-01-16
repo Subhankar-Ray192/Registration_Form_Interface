@@ -77,7 +77,7 @@ class keyManual:
 
     def info(self):
         tmsg.showinfo("Information",
-                      "Registration App: V.2.4.10 \n \n Created By: \n Subhankar Ray, \n Tanir Sahoo, \n Dyutiprovo Sarkar, \n Soumyadeep Samanta, \n Sankho Subhro Maitro.")
+                      "Registration App: V.2.4.13 \n \n Created By: \n Subhankar Ray, \n Tanir Sahoo, \n Dyutiprovo Sarkar, \n Soumyadeep Samanta, \n Sankho Subhro Maitro.")
 
 
 class Container:
