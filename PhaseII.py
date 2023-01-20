@@ -10,7 +10,7 @@ from tkinter import simpledialog
 from tkinter import ttk
 
 mKey = "123"
-policy = "\nWe at our company respect the privacy of our registered canditates." + "\nWe assure you that your personal information shall not be ,misused." + "\nWe can guarantee safety of data incase of third party data breach."
+policy = "\nWe at our company respect the privacy of our registered candidates." + "\nWe assure you that your personal information shall not be misused." + "\nWe can guarantee safety of data incase of third party data breach."
 
 preDefinedFilePath = "D:\\DataFolder\\Data.csv"
 preDefinedDirPath = "D:\\DataFolder"
@@ -161,7 +161,7 @@ class Container:
          viewObj[1].insert(0,row[3] + " " + row[4] + " " + row[5])
          viewObj[2].insert(0,row[6])
          viewObj[3].insert(0,row[7])
-         viewObj[4].insert(0,row[8]+", Kolkata-"+row[9])
+         viewObj[4].insert(0,row[8]+","+row[9])
          viewObj[5].insert(0,row[11])
          for i in viewObj:
           i.bind("<Key>", lambda a: "break")
