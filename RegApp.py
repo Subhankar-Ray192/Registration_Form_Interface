@@ -598,12 +598,10 @@ class pathManager:
             fileHandle().createFile()
 
 
-def main():
+if __name__=="__main__":
     Window().windows()
     Window().keyControls()
     pathManager().dirHandler()
     Container().regEvent()
     windObj.mainloop()
 
-
-main()
