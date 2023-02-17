@@ -8,6 +8,7 @@ from tkinter import filedialog as fd
 from tkinter import messagebox as tmsg
 from tkinter import simpledialog
 from tkinter import ttk
+from PIL import Image,ImageTk
 
 mKey = "123"
 policy = "\nWe at our company respect the privacy of our registered candidates." + "\nWe assure you that your personal information shall not be misused." + "\nWe can guarantee safety of data incase of third party data breach."
@@ -36,6 +37,9 @@ regStatus = ["Valid", "Invalid"]
 countryList=["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"]
 
 
+memberList=["Subhankar Ray","Tanir Sahoo"]
+postList=["Project Manager","Frontend Developer","Backend Developer"]
+
 class Window:
 
     def __init__(self):
@@ -49,7 +53,7 @@ class Window:
         windObj.minsize(self.width, self.height)
         windObj.title("TDSSS and Company")
         windObj.configure(bg=colorPalette[0])
-        #windObj.iconphoto(False, PhotoImage(file="logo2.png"))
+        windObj.iconphoto(True, PhotoImage(file="logo2.png"))
 
     def resizeWin(self, status):
         if (status):
@@ -76,8 +80,79 @@ class keyManual:
                       "\nQuit: Ctrl+q \n\n Hide-Menu: Ctrl+h \n \n Reveal-Menu: Ctrl+j \n \n View-Portal: Ctrl+z \n \n Register-Portal: Ctrl+x\n \n")
 
     def info(self):
-        tmsg.showinfo("Information","Registration App: V.2.4.13 \n \n Created By: \n Subhankar Ray, \n Tanir Sahoo, \n Dyutiprovo Sarkar, \n Soumyadeep Samanta.")
-
+        #tmsg.showinfo("Information","Registration App: V.2.4.13 \n \n Created By: \n Subhankar Ray, \n Tanir Sahoo, \n Dyutiprovo Sarkar, \n Soumyadeep Samanta.")        
+        abtWindObj=Toplevel()
+        abtWindObj.title("Credits")
+        
+        
+        class AboutWindows:
+        
+          def __init__(self):
+            self.height=500
+            self.width=600
+          
+          def windSize(self):
+            abtWindObj.geometry("500x500")
+            abtWindObj.minsize(self.height,self.width)
+            abtWindObj.maxsize(self.height,self.width)
+            abtWindObj["bg"]=colorPalette[0]
+          
+        class AboutContainer:
+          
+          def __init__(self):
+           self.fc=[]
+           return
+          
+          def frameGen(self):
+           for i in range(2): 
+            self.fc.append(Frame(abtWindObj,relief=SUNKEN,height=50,width=700,bg=colorPalette[0]))
+           
+           
+          def imageLayout(self):
+           
+           global profilePic
+           profilePic=Image.open("Credits_Picture1.png")
+           
+           global resizedProfilePic
+           resizedProfilePic=profilePic.resize((500,500))
+           
+           global img 
+           img=ImageTk.PhotoImage(resizedProfilePic)
+           
+           self.fc[0].pack(side=TOP,expand=False)
+           self.fc[0].pack_propagate(0)
+           
+           try:
+             label=Label(abtWindObj,image=img)
+             label.pack()
+           except:
+             label=Label(abtWindObj,text="x")
+             label.pack()
+           
+           self.fc[1].pack(side=TOP,expand=False)
+           self.fc[1].pack_propagate(0)
+           
+          def layout(self):
+           label=Label(self.fc[0],text="Registration App: V.2.4.13", background=colorPalette[0], font="System 15")
+           label.pack()
+          
+           previous=Button(self.fc[1],text="<<",bg=colorPalette[0])
+           label=Label(self.fc[1],text=memberList[0]+" :: "+postList[0]+" & "+postList[2], background=colorPalette[0], font="Bitter 11")
+           forward=Button(self.fc[1],text=">>",bg=colorPalette[0])
+           
+           previous.grid(row=0,column=0)
+           label.grid(row=0,column=1)
+           forward.grid(row=0,column=2)
+           
+          def eventGen(self):
+           self.frameGen()
+           self.imageLayout()
+           self.layout()
+         
+        AboutWindows().windSize()
+        AboutContainer().eventGen()
+        abtWindObj.mainloop()
+        return
 
 
 class Container:
@@ -597,7 +672,7 @@ class pathManager:
         if (not os.path.exists(preDefinedFilePath)):
             fileHandle().createFile()
 
-
+     
 if __name__=="__main__":
     Window().windows()
     Window().keyControls()
