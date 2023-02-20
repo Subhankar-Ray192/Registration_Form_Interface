@@ -141,7 +141,7 @@ class keyManual:
            self.fc[1].grid(row=2,column=0,columnspan=3)
            
           def layout(self):
-           label=Label(self.fc[0],text="Registration App: V.2.4.13", background=colorPalette[0], font="System 15")
+           label=Label(self.fc[0],text="Registration App: V.2.6.14", background=colorPalette[0], font="System 15")
            label.pack()
           
            previous=Button(self.fc[1],text="<<",bg=colorPalette[0],command=lambda: self.back(-1))
