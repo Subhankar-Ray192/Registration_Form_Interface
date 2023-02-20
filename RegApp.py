@@ -37,8 +37,7 @@ regStatus = ["Valid", "Invalid"]
 countryList=["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","St. Lucia","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","Uruguay","Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"]
 
 
-memberList=["Subhankar Ray","Tanir Sahoo"]
-postList=["Project Manager","Frontend Developer","Backend Developer"]
+memberList=["Tanir Sahoo: Frontend Developer","Dyutiprovo Sarkar: Backend Developer","Souymadeep Samanta: Frontend Developer","Subhankar Ray : Project Manager & Backend Developer"]
 
 class Window:
 
@@ -101,6 +100,7 @@ class keyManual:
           
           def __init__(self):
            self.fc=[]
+           self.imagePointer=3
            return
           
           def frameGen(self):
@@ -108,45 +108,71 @@ class keyManual:
             self.fc.append(Frame(abtWindObj,relief=SUNKEN,height=50,width=700,bg=colorPalette[0]))
            
            
-          def imageLayout(self):
+          def imageLayout(self,imgPt):
            
            global profilePic
            profilePic=Image.open("Credits_Picture1.png")
            
+           global defaultPic
+           defaultPic=Image.open("Default_Pictures.png")
+           
            global resizedProfilePic
            resizedProfilePic=profilePic.resize((500,500))
+
+           global resizedDefaultPic
+           resizedDefaultPic=defaultPic.resize((500,500))
            
            global img 
-           img=ImageTk.PhotoImage(resizedProfilePic)
+           img=[]
+           for i in range(3):
+            img.append(ImageTk.PhotoImage(resizedDefaultPic))
+           img.append(ImageTk.PhotoImage(resizedProfilePic))
            
-           self.fc[0].pack(side=TOP,expand=False)
-           self.fc[0].pack_propagate(0)
+           self.fc[0].grid(row=0,column=0,columnspan=3)
            
+           global imageLabel
            try:
-             label=Label(abtWindObj,image=img)
-             label.pack()
+             imageLabel=Label(abtWindObj,image=img[imgPt])
+             imageLabel.grid(row=1,column=0,columnspan=3)
            except:
-             label=Label(abtWindObj,text="x")
-             label.pack()
+             imageLabel=Label(abtWindObj,text="x")
+             imageLabel.grid(row=1,column=0,columnspan=3)
            
-           self.fc[1].pack(side=TOP,expand=False)
-           self.fc[1].pack_propagate(0)
+           self.fc[1].grid(row=2,column=0,columnspan=3)
            
           def layout(self):
            label=Label(self.fc[0],text="Registration App: V.2.4.13", background=colorPalette[0], font="System 15")
            label.pack()
           
-           previous=Button(self.fc[1],text="<<",bg=colorPalette[0])
-           label=Label(self.fc[1],text=memberList[0]+" :: "+postList[0]+" & "+postList[2], background=colorPalette[0], font="Bitter 11")
-           forward=Button(self.fc[1],text=">>",bg=colorPalette[0])
+           previous=Button(self.fc[1],text="<<",bg=colorPalette[0],command=lambda: self.back(-1))
+           label=Label(self.fc[1],text=memberList[self.imagePointer], background=colorPalette[0], font="Bitter 11")
+           forward=Button(self.fc[1],text=">>",bg=colorPalette[0],command=lambda: self.next(1))
            
            previous.grid(row=0,column=0)
            label.grid(row=0,column=1)
            forward.grid(row=0,column=2)
+          
+          def frameClear(self):
+           for i in self.fc:
+            for widgets in i.winfo_children():
+             widgets.destroy()
+          
+          def back(self,i):
+           self.frameClear()
+           if(self.imagePointer>0):
+            self.imagePointer=self.imagePointer+i
+           self.eventGen()
+           return 
+          
+          def next(self,i):
+           self.frameClear()
+           self.imagePointer=(self.imagePointer+i)%4
+           self.eventGen()
+           return
            
           def eventGen(self):
            self.frameGen()
-           self.imageLayout()
+           self.imageLayout(self.imagePointer)
            self.layout()
          
         AboutWindows().windSize()
